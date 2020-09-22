@@ -1,4 +1,4 @@
-baseURL = "https://redcovid19.netlify.app/"
+baseURL = "https://rioemdados.netlify.app/"
 languageCode = "en-us"
 title = "Minimal"
 theme = "minimal"
