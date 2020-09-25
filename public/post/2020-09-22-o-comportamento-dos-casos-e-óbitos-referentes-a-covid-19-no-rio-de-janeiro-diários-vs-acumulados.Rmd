@@ -57,7 +57,7 @@ library("wesanderson")
 
 options(scipen = 999, OutDec = ",")
 
-load("D:/beatr/Downloads/data_post1.RData")
+load("data/data_post1.RData")
 
 ```
 
