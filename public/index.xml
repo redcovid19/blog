@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rio em Dados: Covid-19</title>
-    <link>/</link>
+    <link>https://rioemdados.netlify.app/</link>
     <description>Recent content on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project 1</title>
-      <link>/project/project1/</link>
+      <link>https://rioemdados.netlify.app/project/project1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/project1/</guid>
+      <guid>https://rioemdados.netlify.app/project/project1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 2</title>
-      <link>/project/project2/</link>
+      <link>https://rioemdados.netlify.app/project/project2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/project2/</guid>
+      <guid>https://rioemdados.netlify.app/project/project2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 3</title>
-      <link>/project/project3/</link>
+      <link>https://rioemdados.netlify.app/project/project3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/project3/</guid>
+      <guid>https://rioemdados.netlify.app/project/project3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 4</title>
-      <link>/project/project4/</link>
+      <link>https://rioemdados.netlify.app/project/project4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/project/project4/</guid>
+      <guid>https://rioemdados.netlify.app/project/project4/</guid>
       <description></description>
     </item>
     
     <item>
       <title>O comportamento dos casos e óbitos referentes a Covid-19 no Rio de Janeiro: diários vs acumulados</title>
-      <link>/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</link>
+      <link>https://rioemdados.netlify.app/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</link>
       <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</guid>
+      <guid>https://rioemdados.netlify.app/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</guid>
       <description>body{text-align: justify;}
 Como observar graficamente a evolução diária do número de casos de Covid-19 no Estado do Rio de Janeiro?
 Em qualquer epidemia (ou pandemia, como é o caso da Covid-19), em que se registra o número de casos por dia, o gráfico de linhas (ou traço de uma série temporal) é possivelmente uma das formas de representação gráfica mais simples.</description>
@@ -56,20 +56,20 @@ Em qualquer epidemia (ou pandemia, como é o caso da Covid-19), em que se regist
     
     <item>
       <title>Equipe</title>
-      <link>/equipe/</link>
+      <link>https://rioemdados.netlify.app/equipe/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/equipe/</guid>
+      <guid>https://rioemdados.netlify.app/equipe/</guid>
       <description>Nossa equipe inicial é formada por professores e alunos do curso de mestrado e graduação em Estatística.
           Aline de Mendonça Brasilino Currículo Lattes   Beatriz Rodrigues Pinna Currículo Lattes   Eduardo Freire Mangabeira Currículo Lattes   Fausto Marques Pinheiro Junior Currículo Lattes   Guilherme dos Santos Currículo Lattes   João Batista de Morais Pereira Currículo Lattes   Kelly Cristina Mota Gonçalves Currículo Lattes   Larissa de Carvalho Alves Currículo Lattes   Rafael Cabral Fernandez Currículo Lattes   Renata Souza Bueno Currículo Lattes   Tais da Silva Figueiredo Currículo Lattes     Contato Para entrar em contato, por favor, envie uma mensagem para rioemdadoscovid@gmail.</description>
     </item>
     
     <item>
       <title>Sobre</title>
-      <link>/about/</link>
+      <link>https://rioemdados.netlify.app/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://rioemdados.netlify.app/about/</guid>
       <description>O &amp;ldquo;Rio em Dados: Covid-19&amp;rdquo; é uma iniciativa independente de alguns profissionais da área da Estatística das instituições ENCE/IBGE e UFRJ voltado para o estudo de dados sobre a COVID-19 no estado do Rio de Janeiro.
 Nossa equipe inicial é formada por professores e alunos do curso de mestrado e graduação em Estatística.
 Nossos objetivos   O objetivo geral do projeto é transformar dados em conhecimento para a população e contribuir para a disseminação de informação de qualidade baseada em análises estatísticas.</description>
