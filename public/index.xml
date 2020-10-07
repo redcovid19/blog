@@ -5,8 +5,7 @@
     <link>https://rioemdados.netlify.app/</link>
     <description>Recent content on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://rioemdados.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project 1</title>
       <link>https://rioemdados.netlify.app/project/project1/</link>
@@ -44,24 +43,13 @@
     </item>
     
     <item>
-      <title>O comportamento dos casos e óbitos referentes a Covid-19 no Rio de Janeiro: diários vs acumulados</title>
-      <link>https://rioemdados.netlify.app/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</link>
-      <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://rioemdados.netlify.app/post/o-comportamento-dos-casos-e-%C3%B3bitos-referentes-a-covid-19-no-rio-de-janeiro-di%C3%A1rios-vs-acumulados/</guid>
-      <description>body{text-align: justify;}
-Como observar graficamente a evolução diária do número de casos de Covid-19 no Estado do Rio de Janeiro?
-Em qualquer epidemia (ou pandemia, como é o caso da Covid-19), em que se registra o número de casos por dia, o gráfico de linhas (ou traço de uma série temporal) é possivelmente uma das formas de representação gráfica mais simples.</description>
-    </item>
-    
-    <item>
       <title>Equipe</title>
       <link>https://rioemdados.netlify.app/equipe/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://rioemdados.netlify.app/equipe/</guid>
       <description>Nossa equipe inicial é formada por professores e alunos do curso de mestrado e graduação em Estatística.
-          Aline de Mendonça Brasilino Currículo Lattes   Beatriz Rodrigues Pinna Currículo Lattes   Eduardo Freire Mangabeira Currículo Lattes   Fausto Marques Pinheiro Junior Currículo Lattes   Guilherme dos Santos Currículo Lattes   João Batista de Morais Pereira Currículo Lattes   Kelly Cristina Mota Gonçalves Currículo Lattes   Larissa de Carvalho Alves Currículo Lattes   Rafael Cabral Fernandez Currículo Lattes   Renata Souza Bueno Currículo Lattes   Tais da Silva Figueiredo Currículo Lattes     Contato Para entrar em contato, por favor, envie uma mensagem para rioemdadoscovid@gmail.</description>
+          Aline de Mendonça Brasilino Currículo Lattes   Beatriz Rodrigues Pinna Currículo Lattes   Camila Rodrigues Ramos Currículo Lattes   Eduardo Freire Mangabeira Currículo Lattes   Fausto Marques Pinheiro Junior Currículo Lattes   Guilherme dos Santos Currículo Lattes   João Batista de Morais Pereira Currículo Lattes   Kelly Cristina Mota Gonçalves Currículo Lattes   Larissa de Carvalho Alves Currículo Lattes   Rafael Cabral Fernandez Currículo Lattes   Renata Souza Bueno Currículo Lattes   Tais da Silva Figueiredo Currículo Lattes     Contato Para entrar em contato, por favor, envie uma mensagem para rioemdadoscovid@gmail.</description>
     </item>
     
     <item>

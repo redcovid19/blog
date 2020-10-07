@@ -11,6 +11,7 @@ ________________________________________________________________________________
 | ------ | ------ |
 | Aline de Mendonça Brasilino | [Currículo Lattes](http://lattes.cnpq.br/2813103362869145) |
 | Beatriz Rodrigues Pinna | [Currículo Lattes](http://lattes.cnpq.br/5899568539655203) |
+| Camila Rodrigues Ramos | [Currículo Lattes]() |
 | Eduardo Freire Mangabeira | [Currículo Lattes]() |
 | Fausto Marques Pinheiro Junior | [Currículo Lattes](http://lattes.cnpq.br/3810112164535585) |
 | Guilherme dos Santos | [Currículo Lattes]() |
