@@ -5,17 +5,7 @@
     <link>https://rioemdados.netlify.app/tags/</link>
     <description>Recent content in Tags on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Óbitos</title>
-      <link>https://rioemdados.netlify.app/tags/%C3%B3bitos/</link>
-      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://rioemdados.netlify.app/tags/%C3%B3bitos/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://rioemdados.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>bootstrap</title>
       <link>https://rioemdados.netlify.app/tags/bootstrap/</link>

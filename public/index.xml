@@ -5,8 +5,7 @@
     <link>https://rioemdados.netlify.app/</link>
     <description>Recent content on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://rioemdados.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project 1</title>
       <link>https://rioemdados.netlify.app/project/project1/</link>
@@ -41,15 +40,6 @@
       
       <guid>https://rioemdados.netlify.app/project/project4/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Um milhão de mortos por Covid-19</title>
-      <link>https://rioemdados.netlify.app/post/um-milh%C3%A3o-de-mortos-por-covid-19/</link>
-      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://rioemdados.netlify.app/post/um-milh%C3%A3o-de-mortos-por-covid-19/</guid>
-      <description>No dia 29 de setembro, a marca de UM MILHÃO DE MORTOS POR COVID-19 foi atingida no mundo. Isso ocorreu pouco mais de 10 meses após a primeira morte ser registrada na China No vídeo, podemos ver os 12 países com a maior quantidade acumulada de número de mortos desde o dia 31 de dezembro de 2019. A China é o país com o maior número de mortos até o dia 20 de março quando a Itália assume esse posto que no dia 12 de abril passa a ser dos Estados Unidos.</description>
     </item>
     
     <item>
