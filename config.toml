@@ -18,6 +18,7 @@ googleAnalytics = ""
     highlightLanguages = ["go", "haskell", "kotlin", "scala", "swift"]
     dateFormat = "02/01/2006"
 
+
     # path to the favicon, under "static"
     favicon = "favicon.ico"
 

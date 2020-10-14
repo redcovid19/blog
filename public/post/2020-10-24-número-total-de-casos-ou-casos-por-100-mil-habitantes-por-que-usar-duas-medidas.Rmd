@@ -8,6 +8,10 @@ categories:
 tags:
   - Número de Casos
   - Óbitos
+header-includes:
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
 ---
 
 
@@ -88,8 +92,8 @@ g %>% ggplotly()
   O número de casos por 100 mil habitantes, como o próprio nome diz, representa quantos casos há em uma região para cada 100 mil pessoas neste local. Ele é calculado dividindo-se o número total de casos pelo tamanho da população da região, e em seguida multiplicando por 100 mil. Portanto, esta quantidade é uma forma de averiguar o número de casos de um ponto de vista relativo levando em conta o tamanho da população, o que é bastante interessante quando estamos comparando lugares com tamanhos populacionais diferentes!
   
   Em termos matemáticos, o número de casos por 100 mil habitantes é calculado da seguinte forma:
-  
-  $$\text{Casos por 100 mil habitantes} = \frac{\text{Total de casos}}{\text{População}}\times{100.000}.$$
+
+![](/post/2020-10-24-número-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas_files/post2_image1.PNG){width=100%}
   
   Sob este ponto de vista, portanto, como está a situação nos municípios do Rio de Janeiro atualmente com relação a Covid-19?
   
