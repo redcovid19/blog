@@ -4,6 +4,7 @@ title = "Rio em Dados: Covid-19"
 theme = "minimal"
 disqusShortname = "username" # delete this to disable disqus comments
 googleAnalytics = ""
+exclude_jquery = true
 
 [params]
     author = "Rio em Dados"
@@ -66,3 +67,6 @@ googleAnalytics = ""
     url = "mailto:rioemdadoscovid@gmail.com"
     name = "envelope-o"
     weight = 4
+
+[markup.goldmark.renderer]
+    unsafe= true

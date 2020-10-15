@@ -1,0 +1,38 @@
+---
+title: teste
+author: Aline
+date: '2020-10-14'
+slug: teste
+categories: []
+tags: []
+output:
+  blogdown::html_page:
+    toc: false
+---
+
+ajdnladnksmfkdfmsçdfsçf
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(htmltools)
+library(htmlwidgets)
+library(widgetframe)
+
+#frameWidget(createWidget("embed.js", #"https://flo.uri.sh/visualisation/3886413/embed"))
+
+
+```
+
+```{r}
+#{{ if not .Params.exclude_jquery}}
+#<div class="flourish-embed flourish-bar-chart-race" #data-src="visualisation/3886413" #data-url="https://flo.uri.sh/visualisation/3886413/embed" aria-label=""></div>
+#<script src="https://public.flourish.studio/resources/embed.js"></script>
+#{{ end }}
+```
+
+
+
+<iframe width="853" height="480" src="https://flo.uri.sh/visualisation/3886413/embed" frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe&gt;
+
+
