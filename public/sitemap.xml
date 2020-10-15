@@ -19,11 +19,42 @@
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/bootstrap/</loc>
+    <loc>https://rioemdados.netlify.app/categories/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/categories/</loc>
+    <loc>https://rioemdados.netlify.app/categories/covid19/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/um-milh%C3%A3o-de-mortes-por-covid-19/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/%C3%B3bitos/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/bootstrap/</loc>
   </url>
   
   <url>
@@ -67,19 +98,11 @@
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/</loc>
-  </url>
-  
-  <url>
     <loc>https://rioemdados.netlify.app/about/</loc>
   </url>
   
   <url>
     <loc>https://rioemdados.netlify.app/tags/syntax-highlighting/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/</loc>
   </url>
   
 </urlset>
