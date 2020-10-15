@@ -2,107 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Rio em Dados: Covid-19</title>
-    <link>https://rioemdados.netlify.app/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Número de Casos</title>
+      <link>/tags/n%C3%BAmero-de-casos/</link>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/n%C3%BAmero-de-casos/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Óbitos</title>
-      <link>https://rioemdados.netlify.app/tags/%C3%B3bitos/</link>
-      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      <link>/tags/%C3%B3bitos/</link>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/%C3%B3bitos/</guid>
+      <guid>/tags/%C3%B3bitos/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bootstrap</title>
-      <link>https://rioemdados.netlify.app/tags/bootstrap/</link>
+      <link>/tags/bootstrap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/bootstrap/</guid>
+      <guid>/tags/bootstrap/</guid>
       <description></description>
     </item>
     
     <item>
       <title>css</title>
-      <link>https://rioemdados.netlify.app/tags/css/</link>
+      <link>/tags/css/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/css/</guid>
+      <guid>/tags/css/</guid>
       <description></description>
     </item>
     
     <item>
       <title>go</title>
-      <link>https://rioemdados.netlify.app/tags/go/</link>
+      <link>/tags/go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/go/</guid>
+      <guid>/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang</title>
-      <link>https://rioemdados.netlify.app/tags/golang/</link>
+      <link>/tags/golang/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/golang/</guid>
+      <guid>/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>highlight-js</title>
-      <link>https://rioemdados.netlify.app/tags/highlight-js/</link>
+      <link>/tags/highlight-js/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/highlight-js/</guid>
+      <guid>/tags/highlight-js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>html</title>
-      <link>https://rioemdados.netlify.app/tags/html/</link>
+      <link>/tags/html/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/html/</guid>
+      <guid>/tags/html/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>https://rioemdados.netlify.app/tags/hugo/</link>
+      <link>/tags/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/hugo/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>js</title>
-      <link>https://rioemdados.netlify.app/tags/js/</link>
+      <link>/tags/js/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/js/</guid>
+      <guid>/tags/js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>responsive</title>
-      <link>https://rioemdados.netlify.app/tags/responsive/</link>
+      <link>/tags/responsive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/responsive/</guid>
+      <guid>/tags/responsive/</guid>
       <description></description>
     </item>
     
     <item>
       <title>syntax-highlighting</title>
-      <link>https://rioemdados.netlify.app/tags/syntax-highlighting/</link>
+      <link>/tags/syntax-highlighting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/syntax-highlighting/</guid>
+      <guid>/tags/syntax-highlighting/</guid>
       <description></description>
     </item>
     

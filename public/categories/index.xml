@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Rio em Dados: Covid-19</title>
-    <link>https://rioemdados.netlify.app/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Rio em Dados: Covid-19</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Covid19</title>
-      <link>https://rioemdados.netlify.app/categories/covid19/</link>
-      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      <link>/categories/covid19/</link>
+      <pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/categories/covid19/</guid>
+      <guid>/categories/covid19/</guid>
       <description></description>
     </item>
     
