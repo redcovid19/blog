@@ -5,10 +5,10 @@ date: '2020-10-15'
 slug: teste2
 categories: []
 tags: []
+output:
+  blogdown::html_page:
+    toc: false
 ---
 
-dhfsdbkfnasjkdnasld
-
-
-<iframe width="853" height="480" src="https://www.youtube.com/embed/9P15WoXIzV4" frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe&gt;
+<div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/3886413" data-url="https://flo.uri.sh/visualisation/3886413/embed" aria-label=""></div>
+<script src="https://public.flourish.studio/resources/embed.js"></script>
