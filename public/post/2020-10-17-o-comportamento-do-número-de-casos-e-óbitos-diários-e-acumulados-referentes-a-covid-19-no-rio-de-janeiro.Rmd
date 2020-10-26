@@ -2,7 +2,7 @@
 title: O comportamento do número de casos e óbitos diários e acumulados referentes
   a Covid-19 no Rio de Janeiro
 author: Rafael Cabral
-date: '2020-10-17'
+date: '2020-10-26'
 slug: o-comportamento-do-número-de-casos-e-óbitos-diários-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro
 categories:
   - Covid19
@@ -11,6 +11,7 @@ tags:
   - Óbitos
 ---
 
+**Por Rafael Cabral Fernandez**
 
 ```{r setup, include=FALSE,message=FALSE,warning=F}
 knitr::opts_chunk$set(echo = TRUE)
@@ -159,3 +160,14 @@ layout(xaxis = list(title = "Mês"), yaxis = list (title = "Quantidade de óbito
 fig
 
 ```
+
+
+<br>
+
+### Fonte
+
+Secretariais municipais de saúde através do [Data.Rio](https://www.data.rio/) e do [Brasil.io](https://brasil.io/home/).
+
+<br>
+
+* **Período dos dados analisados: 6 março a 30 de setembro de 2020. **

@@ -15,6 +15,7 @@ ________________________________________________________________________________
 | Eduardo Freire Mangabeira | [Currículo Lattes]() |
 | Fausto Marques Pinheiro Junior | [Currículo Lattes](http://lattes.cnpq.br/3810112164535585) |
 | Guilherme dos Santos | [Currículo Lattes]() |
+| Gustavo da Silva Ferreira |  [Currículo Lattes](http://lattes.cnpq.br/7031331622887724) |
 | João Batista de Morais Pereira | [Currículo Lattes](http://lattes.cnpq.br/5251604111283337) |
 | Kelly Cristina Mota Gonçalves | [Currículo Lattes](http://lattes.cnpq.br/1715326722961736) |
 | Larissa de Carvalho Alves | [Currículo Lattes](http://lattes.cnpq.br/1421662873815592) |

@@ -3,83 +3,111 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/project1/</loc>
+    <loc>/project/project1/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/project2/</loc>
+    <loc>/project/project2/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/project3/</loc>
+    <loc>/project/project3/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/project4/</loc>
+    <loc>/project/project4/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/bootstrap/</loc>
+    <loc>/categories/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/categories/</loc>
+    <loc>/categories/covid19/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/css/</loc>
+    <loc>/tags/n%C3%BAmero-de-casos/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/equipe/</loc>
+    <loc>/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/go/</loc>
+    <loc>/post/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/golang/</loc>
+    <loc>/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/highlight-js/</loc>
+    <loc>/tags/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/html/</loc>
+    <loc>/tags/%C3%B3bitos/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/hugo/</loc>
+    <loc>/tags/bootstrap/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/js/</loc>
+    <loc>/tags/css/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/</loc>
+    <loc>/equipe/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/responsive/</loc>
+    <loc>/tags/go/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/</loc>
+    <loc>/tags/golang/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/about/</loc>
+    <loc>/tags/highlight-js/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/syntax-highlighting/</loc>
+    <loc>/tags/html/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/</loc>
+    <loc>/tags/hugo/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/js/</loc>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/responsive/</loc>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/syntax-highlighting/</loc>
   </url>
   
 </urlset>
