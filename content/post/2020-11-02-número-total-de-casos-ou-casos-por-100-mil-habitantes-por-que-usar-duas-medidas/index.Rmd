@@ -88,14 +88,9 @@ g %>% ggplotly(tooltip = c("text"))
   
   Em termos matemáticos, o número de casos por 100 mil habitantes é calculado da seguinte forma:
 
-imagem site:
 
-![](/2020-11-02-número-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/index_files/post2_image1.PNG)
-
-imagem código html:
-  
 <span class='img_container center' style='display: inline-block;'>
-    <img alt='test' src='https://i.imgur.com/pP3WFOA.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <img alt='taxa' src='https://i.imgur.com/pP3WFOA.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
