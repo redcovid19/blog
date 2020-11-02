@@ -1,0 +1,295 @@
+---
+title: Número total de casos ou casos por 100 mil habitantes? Por que usar duas medidas?
+author: Guilherme dos Santos
+date: '2020-11-02'
+slug: []
+categories:
+  - Covid19
+tags:
+  - Óbitos
+---
+
+**Por Guilherme dos Santos**
+
+```{r, warning = F, message= F, include = FALSE}
+knitr::opts_chunk$set(warning = F, message = F, echo = F)
+library(tidyverse)
+library(lubridate)
+library(brazilmaps)
+library(tmap)
+library(ggplot2)
+library(gganimate)
+library(plotly)
+library(knitr)
+library(kableExtra)
+
+
+path = "D:\\beatr\\Documentos\\R\\blog\\content\\post\\data\\"
+
+municipios_rj <- read.csv2(paste0(path,"municpios_rj.csv"), row.names = 1)
+municipios_rj <- municipios_rj %>% 
+  mutate_at(.vars = vars(4,5, 8:9, 11:13, 16,17), ~as.numeric(.))
+dados <- municipios_rj
+dados <- dados %>% 
+  rename(confirmed_per_100k = last_available_confirmed_per_100k_inhabitants) %>% 
+  mutate(date = ymd(date),
+         city_ibge_code = as.numeric(city_ibge_code),
+         confirmed_per_100k = round(as.numeric(confirmed_per_100k), 2)) %>% 
+  filter(date == max(date))
+
+```
+
+<style>
+body {
+text-align: justify}
+</style>
+
+
+Observando o mapa abaixo, que retrata o total de casos confirmados de Covid-19 nos municípios do Rio de Janeiro, qual informação você consegue concluir a respeito da distribuição espacial dos casos? 
+
+
+```{r}
+dados %>% 
+  mutate(last_available_confirmed = as.numeric(last_available_confirmed)) -> dados
+
+get_brmap("City", geo.filter = list(State = 33)) %>% 
+  left_join(dados, c("City" = "city_ibge_code")) %>%
+  mutate(hover = paste("Município:", city, '<br>',
+                       'Confirmados: ', last_available_confirmed)) %>% 
+  ggplot() +
+  geom_sf(aes(fill = last_available_confirmed, text = hover), colour = "black", size = 0.1) +
+  #scale_fill_viridis_c(direction = 1, option = "") +
+  #scale_fill_continuous(limits = c(150,3000), breaks = quantile(dados$confirmed_per_100k, 0:5/5, na.rm = T, names = F),
+ #guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE, barheight = 20)) +
+  scale_fill_continuous(#colours = heat.colors(7), 
+                       #breaks = c(150, 600, 1050, 1500, 1950, 2400, 2850), 
+                       type = "gradient", high = "#FF0000FF", low = "#FFFF80FF") + 
+  labs(fill = "Número de casos confirmados \n de Covid-19") +
+  theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank())  -> g
+  #scale_fill_brewer(palette = "heat") -> g 
+
+g %>% ggplotly(tooltip = c("text")) 
+```
+
+  É difícil retirar alguma informação além de que o município do Rio de Janeiro (em vermelho no mapa) apresenta o maior número de casos, uma vez que seu número de casos elevado acaba impossibilitando a análise de outros municípios. Este comportamento deriva principalmente do fato de que a população no Rio de Janeiro é a maior entre todos os municípios do estado. Assim, é natural que o número de casos destoe dos outros municípios, visto que a população exposta é bem maior.
+  
+  Por exemplo: Imagine que existam duas turmas em uma escola, uma com 100 alunos e uma com 20. Se a turma com  100 alunos apresenta 30 alunos infectados enquanto a turma com 20 alunos apresenta apenas 10, observando o número total de casos, pode parecer óbvio que a situação na turma com 100 alunos é mais grave. No entanto, quando a quantidade de casos é observada em relação ao tamanho das turmas, a turma com 20 alunos está em uma situação mais complicada.
+  
+  Uma forma usual de contornar este problema causado pela diferença nos tamanhos populacionais é o uso de número de casos por 100 mil habitantes, você já deve ter ouvido falar desta medida.
+  
+  O número de casos por 100 mil habitantes, como o próprio nome diz, representa quantos casos há em uma região para cada 100 mil pessoas neste local. Ele é calculado dividindo-se o número total de casos pelo tamanho da população da região, e em seguida multiplicando por 100 mil. Portanto, esta quantidade é uma forma de averiguar o número de casos de um ponto de vista relativo levando em conta o tamanho da população, o que é bastante interessante quando estamos comparando lugares com tamanhos populacionais diferentes!
+  
+  Em termos matemáticos, o número de casos por 100 mil habitantes é calculado da seguinte forma:
+
+![](/2020-11-02-número-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/index_files/post2_image1.PNG)
+
+![Imgur](https://i.imgur.com/pP3WFOA.png)
+  
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='test' src='https://i.imgur.com/pP3WFOA.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+  Sob este ponto de vista, portanto, como está a situação nos municípios do Rio de Janeiro atualmente com relação a Covid-19?
+  
+```{r, include = F}
+dados %>% 
+  arrange(desc(confirmed_per_100k)) %>% 
+  select(city, confirmed_per_100k) %>% 
+  head(3) -> top3_geral
+
+dados %>% 
+  filter(estimated_population_2019 > 10^5) %>% 
+  arrange(desc(confirmed_per_100k)) %>% 
+  select(city, confirmed_per_100k) %>% 
+  head(3) -> top3_pop_100mil
+
+```
+  
+
+  O mapa abaixo mostra o número de casos confirmados de Covid-19 por 100 mil habitantes em cada município do Rio de Janeiro em `r format(max(dados$date), "%d/%m/%Y")`. Os municípios que mais se destacam são `r top3_geral$city[1]` com `r format(top3_geral$confirmed_per_100k[1], decimal.mark = ",")` casos por 100.000 habitantes, `r top3_geral$city[2]` com `r format(top3_geral$confirmed_per_100k[2], decimal.mark = ",")` casos por 100.000 habitantes e `r top3_geral$city[3]` com `r format(top3_geral$confirmed_per_100k[3], decimal.mark = ",")` casos por 100.000 habitantes.
+  
+```{r}
+get_brmap("City", geo.filter = list(State = 33)) %>% 
+  left_join(dados, c("City" = "city_ibge_code")) %>%
+  mutate(hover = paste("Município:", city, '<br>',
+                       'Confirmados por 100k: ', confirmed_per_100k)) %>% 
+  ggplot() +
+  geom_sf(aes(fill = confirmed_per_100k, text = hover), colour = "black", size = 0.1) +
+  #scale_fill_viridis_c(direction = 1, option = "") +
+  #scale_fill_continuous(limits = c(150,3000), breaks = quantile(dados$confirmed_per_100k, 0:5/5, na.rm = T, names = F),
+ #guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE, barheight = 20)) +
+  scale_fill_continuous(#colours = heat.colors(7), 
+                       #breaks = c(150, 600, 1050, 1500, 1950, 2400, 2850), 
+                       type = "gradient", high = "#FF0000FF", low = "#FFFF80FF") + 
+  labs(fill = "Número de casos confirmados \n de Covid-19 por 100 mil habitantes") +
+  theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank())  -> g
+  #scale_fill_brewer(palette = "heat") -> g 
+
+g %>% ggplotly(tooltip = c("text"))
+```
+  
+  Por outro lado, esta medida pode ser injusta com municípios que possuem poucos habitantes, especialmente em municípios com muito menos que 100 mil habitantes, uma vez que a medida representa o número de casos "a cada 100 mil habitantes".   
+  
+  Assim, é interessante averiguar as cidades com mais de 100 mil habitantes. Dentre estas, as que mais se destacaram foram `r top3_pop_100mil$city[1]` com `r format(top3_pop_100mil$confirmed_per_100k[1], decimal.mark = ",")` casos por 100 mil habitantes, `r top3_pop_100mil$city[2]` com `r format(top3_pop_100mil$confirmed_per_100k[2], decimal.mark = ",")` casos por 100 mil habitantes e `r top3_pop_100mil$city[3]` com `r format(top3_pop_100mil$confirmed_per_100k[3], decimal.mark = ",")` casos por 100 mil habitantes.
+  
+  Está interessado em seu município? A tabela abaixo mostra o total de casos confirmados, o número de habitantes e o número de casos por 100 mil habitantes para os 92 municípios do Rio de Janeiro. 
+  
+  <!-- os 10 municípios com o maior número de casos por 100 mil habitantes, o total de casos confirmados em cada município, a população, e seu número de casos por 100 mil habitantes. -->
+
+```{r}
+dados %>% 
+  arrange(desc(as.numeric(confirmed_per_100k))) %>% 
+  select(city, last_available_confirmed, estimated_population_2019, confirmed_per_100k) %>% 
+  rename(Município = city,
+         `Total de casos` = last_available_confirmed,
+         População = estimated_population_2019,
+         `Casos confirmados por 100 mil habitantes` = confirmed_per_100k) %>% 
+  DT::datatable(options = list(language = list(url = "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json")))
+```
+
+ 
+
+
+  A mesma discussão é cabível quando se trata do número de óbitos por Covid-19, pois estes também são influenciados pelo tamanho da população. Assim, de forma análoga, faz-se necessário observar esta medida sob um ponto de vista relativo, e não somente o número total de óbitos.
+  
+  Os mapas abaixo mostram, respectivamente, o número de óbitos total e o número de óbitos por 100 mil habitantes nos municípios do Rio de Janeiro em `r format(max(dados$date), "%d/%m/%Y")`.
+  
+  É notável que, assim como no caso anterior, não é possível retirar grande informação a partir do gráfico com o número absoluto de óbitos. O que é contornado quando é observado o número de óbitos por 100 mil habitantes.
+  
+```{r, include = F}
+dados %>% 
+  mutate(last_available_deaths = as.numeric(last_available_deaths),
+         obitos_por_100mil = round(last_available_deaths/estimated_population_2019*10^5, 2)) -> dados
+dados %>% 
+  arrange(desc(obitos_por_100mil)) %>% 
+  select(city, obitos_por_100mil) %>% 
+  head(3) -> top3_geral_obitos
+
+dados %>% 
+  filter(estimated_population_2019 > 10^5) %>% 
+  arrange(desc(obitos_por_100mil)) %>% 
+  select(city, obitos_por_100mil) %>% 
+  head(3) -> top3_pop_100mil_obitos
+
+```
+  
+  
+  Os municípios que mais se destacam são `r top3_geral_obitos$city[1]` com `r format(top3_geral_obitos$obitos_por_100mil[1], decimal.mark = ",")` óbitos por 100.000 habitantes, `r top3_geral_obitos$city[2]` com `r format(top3_geral_obitos$obitos_por_100mil[2], decimal.mark = ",")` óbitos por 100.000 habitantes e `r top3_geral_obitos$city[3]` com `r format(top3_geral_obitos$obitos_por_100mil[3], decimal.mark = ",")` óbitos por 100.000 habitantes.
+  
+  Entre as cidades com mais de 100 mil habitantes, as que apresentaram os maiores números de óbitos por 100 mil habitantes foram  `r top3_pop_100mil_obitos$city[1]` com `r format(top3_pop_100mil_obitos$obitos_por_100mil[1], decimal.mark = ",")` óbitos por 100.000 habitantes, `r top3_pop_100mil_obitos$city[2]` com `r format(top3_pop_100mil_obitos$obitos_por_100mil[2], decimal.mark = ",")` óbitos por 100.000 habitantes e `r top3_pop_100mil_obitos$city[3]` com `r format(top3_pop_100mil_obitos$obitos_por_100mil[3], decimal.mark = ",")` óbitos por 100.000 habitantes.
+  
+  
+```{r}
+dados %>% 
+  mutate(last_available_deaths = as.numeric(last_available_deaths)) -> dados
+
+get_brmap("City", geo.filter = list(State = 33)) %>% 
+  left_join(dados, c("City" = "city_ibge_code")) %>%
+  mutate(hover = paste("Município:", city, '<br>',
+                       'Óbitos: ', last_available_deaths)) %>% 
+  ggplot() +
+  geom_sf(aes(fill = last_available_deaths, text = hover), colour = "black", size = 0.1) +
+  #scale_fill_viridis_c(direction = 1, option = "") +
+  #scale_fill_continuous(limits = c(150,3000), breaks = quantile(dados$confirmed_per_100k, 0:5/5, na.rm = T, names = F),
+ #guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE, barheight = 20)) +
+  scale_fill_continuous(#colours = heat.colors(7), 
+                       #breaks = c(150, 600, 1050, 1500, 1950, 2400, 2850), 
+                       type = "gradient", high = "#FF0000FF", low = "#FFFF80FF") + 
+  labs(fill = "Número total de óbitos \n por Covid-19") +
+  theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank())  -> g
+  #scale_fill_brewer(palette = "heat") -> g 
+
+g %>% ggplotly(tooltip = c("text"))
+```
+  
+  
+  
+```{r}
+dados %>% 
+  mutate(last_available_deaths = as.numeric(last_available_deaths),
+         obitos_por_100mil = round(last_available_deaths/estimated_population_2019*10^5,2)) -> dados
+
+get_brmap("City", geo.filter = list(State = 33)) %>% 
+  left_join(dados, c("City" = "city_ibge_code")) %>%
+  mutate(hover = paste("Município:", city, '<br>',
+                       'Óbitos por 100 mil: ', obitos_por_100mil)) %>% 
+  ggplot() +
+  geom_sf(aes(fill = obitos_por_100mil, text = hover), colour = "black", size = 0.1) +
+  #scale_fill_viridis_c(direction = 1, option = "") +
+  #scale_fill_continuous(limits = c(150,3000), breaks = quantile(dados$confirmed_per_100k, 0:5/5, na.rm = T, names = F),
+ #guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE, barheight = 20)) +
+  scale_fill_continuous(#colours = heat.colors(7), 
+                       #breaks = c(150, 600, 1050, 1500, 1950, 2400, 2850), 
+                       type = "gradient", high = "#FF0000FF", low = "#FFFF80FF") + 
+  labs(fill = "Número de óbitos por Covid-19 \n por 100 mil habitantes") +
+  theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank())  -> g
+  #scale_fill_brewer(palette = "heat") -> g 
+
+g %>% ggplotly(tooltip = c("text"))
+```
+  
+  A tabela abaixo mostra o número de óbitos por Covid-19, população e número de óbitos por 100 mil habitantes para cada município do Rio de Janeiro.
+
+```{r}
+language_list = list(
+  paginate = list(previous = "Anterior", `next` = "Próximo"),
+  Search = "Buscar"
+)
+dados %>% 
+  arrange(desc(as.numeric(obitos_por_100mil))) %>% 
+  select(city, last_available_deaths, estimated_population_2019, obitos_por_100mil) %>% 
+  rename(Município = city,
+         `Total de óbitos` = last_available_deaths,
+         População = estimated_population_2019,
+         `Óbitos por 100 mil habitantes` = obitos_por_100mil) %>% 
+  DT::datatable(options = list(language = list(url = "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json")))
+                                                 
+                                                 ##"C:\\Users\\Guilherme.Santos\\Downloads\\language_pt_datatable.json")))
+```
+
+
+<br>
+
+### Fonte
+
+Secretariais municipais de saúde através do [Data.Rio](https://www.data.rio/) e do [Brasil.io](https://brasil.io/home/).
+
+<br>
+
+**Período dos dados analisados**
+
+ 
+ * Tabelas: 5 de março a 23 de outubro de 2020;
+ 
+ * Mapas: 23 de outubro de 2020.
+ 
+ 

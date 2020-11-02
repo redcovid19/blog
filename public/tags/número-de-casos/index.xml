@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Número de Casos on Rio em Dados</title>
-    <link>/tags/n%C3%BAmero-de-casos/</link>
+    <link>https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/</link>
     <description>Recent content in Número de Casos on Rio em Dados</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/n%C3%BAmero-de-casos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>O comportamento do número de casos e óbitos diários e acumulados referentes a Covid-19 no Rio de Janeiro</title>
-      <link>/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/</link>
+      <link>https://rioemdados.netlify.app/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/</link>
       <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/</guid>
+      <guid>https://rioemdados.netlify.app/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/</guid>
       <description>Por Rafael Cabral Fernandez
-
+body {text-align: justify}
 Como observar graficamente a evolução diária do número de casos de Covid-19 no estado do Rio de Janeiro?
 Em qualquer epidemia (ou pandemia, como é o caso da Covid-19), em que se registra o número de casos por dia, o gráfico de linhas (ou traço de uma série temporal) é possivelmente uma das formas de representação gráfica mais simples.</description>
     </item>
