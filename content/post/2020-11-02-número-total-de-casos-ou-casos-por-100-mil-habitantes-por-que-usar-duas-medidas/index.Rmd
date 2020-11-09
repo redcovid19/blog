@@ -6,7 +6,10 @@ slug: []
 categories:
   - Covid19
 tags:
-  - Óbitos
+  - número de casos
+  - óbitos
+  - mapa covid19
+  - taxa por 100 mil habitantes
 ---
 
 **Por Guilherme dos Santos**

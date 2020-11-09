@@ -7,37 +7,23 @@ slug: o-comportamento-do-número-de-casos-e-óbitos-diários-e-acumulados-refere
 categories:
   - Covid19
 tags:
-  - Número de Casos
-  - Óbitos
+  - número de casos
+  - óbitos
 ---
 
 **Por Rafael Cabral Fernandez**
 
 ```{r setup, include=FALSE,message=FALSE,warning=F}
 knitr::opts_chunk$set(echo = TRUE)
-library("rsconnect")
-library("rmdformats")
 library("kableExtra")
-library("rtweet")
 library("dplyr")
 library("stringr")
 library("lubridate")
-library("tm")
-library("SnowballC")
-library("wordcloud")
-library("wordcloud2")
-library("RColorBrewer")
-library("readr")
-library("wordcloud2")
 library("plotly")
 library("DT")
 library("tidyverse")
-library("lubridate")
 library("ggplot2")
-library("plotly")
-library("hrbrthemes")
 library("ggthemes")
-library("wesanderson")
 
 options(scipen = 999, OutDec = ",")
 
