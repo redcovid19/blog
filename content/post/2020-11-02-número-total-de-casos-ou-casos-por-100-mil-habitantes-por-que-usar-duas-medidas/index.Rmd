@@ -27,9 +27,8 @@ library(knitr)
 library(kableExtra)
 
 
-path = "D:\\beatr\\Documentos\\R\\blog\\content\\post\\data\\"
+municipios_rj <- read.csv2("data/municpios_rj.csv", row.names = 1)
 
-municipios_rj <- read.csv2(paste0(path,"municpios_rj.csv"), row.names = 1)
 municipios_rj <- municipios_rj %>% 
   mutate_at(.vars = vars(4,5, 8:9, 11:13, 16,17), ~as.numeric(.))
 dados <- municipios_rj

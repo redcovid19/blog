@@ -26,22 +26,17 @@ library("plotly")
 library("ggthemes")
 library("tidyverse")
 
+load("data/data_post_semana3.RData")
+
+
 ```
 
-
-
-```{r}
-#save.image("~/data_post_semana3.RData")
-
-path = "D:\\beatr\\Documentos\\R\\blog\\content\\post\\data\\"
-load(paste0(path,"data_post_semana3.RData"))
-
-```
 
 <style>
 body{text-align: justify;}
 </style>
 
+**Por Rafael Cabral Fernandez**
 
 Imagine que seja de interesse analisar no mesmo gráfico o número de casos ou óbitos acumulados em todos os municípios do Rio de Janeiro. Do ponto de vista visual, isso seria razoável?
 

@@ -1,0 +1,298 @@
+---
+title: O que é média móvel?
+author: ''
+date: '2020-11-16'
+slug: []
+categories:
+  - Covid19
+  - Rio de Janeiro
+tags:
+  - número de casos
+  - óbitos
+  - média móvel
+  - taxa móvel
+---
+
+
+```{r, warning = F, message= F,echo=F}
+knitr::opts_chunk$set(warning = F, message = F)
+
+
+library("kableExtra")
+library("dplyr")
+library("RColorBrewer")
+library("plotly")
+library("tidyverse")
+library("lubridate")
+library("ggplot2")
+library("gganimate")
+library("ggthemes")
+library("pracma")
+
+
+load("data/data_post_semana4.RData")
+```
+
+
+<style>
+body{text-align: justify;}
+</style>
+
+**Por Rafael Cabral Fernandez**
+
+Muito tem se falado na mídia e nos telejornais sobre média móvel, mas você sabe o que significa? Nesta postagem vamos explicar de forma simples sua utilidade e como interpretá-la. Por que é uma medida tão utilizada pelos maiores veículos jornalísticos brasileiros e mundo afora? Descubra conosco!
+
+
+Analisar gráficos que evoluem diariamente ao longo do tempo pode ser uma tarefa desafiadora. Em diversas situações, como a apresentada no gráfico a seguir, devido a variabilidade observada (ruído), torna-se difícil identificar padrões de forma imediata, ou tirar conclusões que sejam relevantes para o estudo da pandemia. Então, o que podemos fazer para interpretar melhor esses dados?
+
+Uma das abordagens mais simples é utilizar medidas que resumem a informação, como a média. O gráfico a seguir apresenta o número de casos diários registrados de Covid-19 no estado do Rio de Janeiro de 5 de março a 23 de outubro de 2020. Calculou-se a média dos casos diários para este mesmo período e pode-se observar que podemos dividir o número de casos diários confirmados em duas categorias, os dias que apresentaram número de casos acima da média (aproximadamente 1.238, representado pela linha preta tracejada) e aqueles que apresentaram casos diários abaixo da média. Veja, por exemplo, que até maio de 2020,  o número de casos diários no estado do Rio de Janeiro manteve-se abaixo da média na maior parte do tempo, vindo a apresentar um crescimento a partir do referido mês. 
+
+
+```{r,message=FALSE,warning=F,echo=F}
+
+m <- list(
+  l = 50,
+  r = 240,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+global = mean(estado_rj$new_confirmed)
+
+fig <- plot_ly(estado_rj, x = ~ymd(date), y = ~new_confirmed, name = 'Casos confirmados',type = 'bar', mode = 'lines',line = list(color = "	rgb(100,149,237)", width = 4)) %>% 
+add_trace(y = ~global, name = 'Média Estadual', line = list(color="rgb(0,0,0)",width = 4, dash = 'dot'),type='scatter') %>% 
+layout(xaxis = list(title = "Mês"), yaxis = list (title = "Casos confirmados"),title = 'Casos confirmados de Covid-19 por dia no estado do Rio de Janeiro',autosize = F, width = 850, height = 500, margin = m) %>%
+config(locale = "pt-br")
+
+fig
+```
+
+
+
+A média estadual varia conforme o tempo passa e são observados novos registros, não sendo uma medida estática. Em outras palavras, a linha tracrejada no gráfico que representa a média pode se deslocar para cima ou para baixo, a depender se houver mais ou menos casos confirmados de Covid-19, respectivamente. Mas, como poderíamos representar essa alteração na média ao longo do tempo? A média móvel surge neste caso como uma alternativa, tratando-se de uma medida com cálculo e interpretação amigável, sendo definida como a média dos últimos 7 dias. Além de não ser influenciada por observações antigas, a média móvel representa o atual momento mais fielmente ao suavizar a série temporal dos dados (desconsiderando o ruído), como um recorte fotográfico.
+
+
+A figura abaixo tráz uma visualização de como a média móvel é calculada, suponha que foi observado 1º de outubro até hoje (23 de outubro). Por definição, a média móvel semanal é a média de casos ou mortes dos últimos 7 dias. Por exemplo, se a média móvel de 23 de outrubro for de interesse, basta calcular a média dos valores registrados dos últimos 7 dias, ou seja, do dia 23 de outubro até o dia 17 de de outubro.
+
+
+Logo, de maneira informal, podemos considerar a média móvel do dia 23 como: 
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='media_movel' src='https://i.imgur.com/xvorRDH.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='media_movel' src='https://i.imgur.com/bSjEU7k.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+
+Pela figura abaixo, podemos ver como a média móvel do número de casos nos últimos 7 dias (linha em vermelho) se apresenta mais suavizada (sem picos bruscos ou quedas repentinas ao zero) quando comparado com o número de casos diários. A tendência dos casos diários apresenta um comportamento cíclico de altos e baixos, variando em torno da média estadual. No gráfico, o ponto de exclamação indica os dias 24 e 25 de julho, exatamente duas semanas após a reabertura comercial e escolar no município do Rio de Janeiro. Embora esta semana não tenha registrado os maiores números de casos diários em todo este tempo, a média móvel indica que a referida semana apresentou um comportamento explosivo, isto é, uma grande quantidade de casos confirmados em um curto período de tempo. Contudo, isso não significa que o reabertura causou o agravamento de casos registrados. O que se tem são evidências sugeridas pelo conjunto de dados que indicam uma possível associação entre a reabertura comercial/escolar e uma subsequente alta de casos confirmados de Covid-19 no estado do Rio de Janeiro.
+
+
+```{r,message=FALSE,warning=F,echo=F}
+ma = movavg(estado_rj$new_confirmed, n = 7)
+global = mean(estado_rj$new_confirmed)
+
+a <- list(
+  x = ymd("2020-07-25"),
+  y = 3009,
+  text = "!",
+  xref = "x",
+  yref = "y",
+  showarrow = TRUE,
+  arrowhead = 10,
+  arrowsize = 2,
+  ax = 20,
+  ay = -40,
+  font = list( size = 25)
+)
+
+fig <- plot_ly(estado_rj, x = ~ymd(date), y = ~new_confirmed, name = 'Casos confirmados', type = 'bar', mode = 'lines',line = list(color = "	rgb(100,149,237)", width = 3)) %>% 
+add_trace(y = ~global, name = 'Média Estadual', line = list(color="rgb(0,0,0)",width = 4, dash = 'dot'),type='scatter') %>% 
+add_trace(y = ~ma, name = 'Média Móvel', line = list(color="rgb(220,20,60)",width = 3, dash = 'dot'),type='scatter') %>% 
+layout(annotations = list(a),xaxis = list(title = "Mês"), yaxis = list (title = "Casos confirmados"),title = 'Casos confirmados por Covid-19 por dia no estado do Rio de Janeiro',autosize = F, width = 850, height = 500, margin = m) %>%
+
+config(locale = "pt-br")
+
+fig
+
+```
+
+
+Por outro lado, quando observado o número de óbitos diários por Covid-19, percebemos um cenário diferente. Repare pelo gráfico abaixo como o pico de mortes registrado pela média móvel coincide com o pico de mortes diárias. O mês de junho foi quando houve a maior quantidade, tanto de casos quanto de óbitos, no estado do Rio de Janeiro. De julho em diante, a tendência do número de óbitos passa a ser decrescente chegando a flutuar ao redor da média estadual, indicando uma aparente estabilização. Entretanto, lembre-se que quando uma série estabiliza em um valor diferente de zero, este cenário está longe de ser o ideal. Significa que os registros de óbitos apresentam pouca variação, mas ainda há mortes decorrentes da Covid-19 ocorrendo dia após dia. Tome como exemplo o mês de outubro, onde foi registrado cerca de 80 óbitos pela média móvel, decrescendo lentamente até 67 óbitos registrados 22 dias depois. Por mais que os dados apresentem otimismo em relação ao decaimento, mesmo que lento, não podemos dizer que não há mais mortes por Covid-19 no estado do Rio de Janeiro.
+
+
+```{r,message=FALSE,warning=F,echo=F}
+ma = movavg(estado_rj$new_deaths, n = 7)
+global = mean(estado_rj$new_deaths)
+
+m <- list(
+  l = 50,
+  r = 240,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+a <- list(
+  x = ymd("2020-06-4"),
+  y = 210,
+  text = "!",
+  xref = "x",
+  yref = "y",
+  showarrow = TRUE,
+  arrowhead = 10,
+  arrowsize = 2,
+  ax = 20,
+  ay = -40,
+  font = list( size = 25)
+)
+
+
+fig <- plot_ly(estado_rj, x = ~ymd(date),name = "Óbitos registrados", y = ~new_deaths, names = NULL, type = 'bar', mode = 'lines',line = list(color = "	rgb(100,149,237)", width = 3)) %>% 
+add_trace(y = ~global, name = 'Média Estadual', line = list(color="rgb(0,0,0)",width = 5, dash = 'dot'),type='scatter') %>% 
+add_trace(y = ~ma, name = 'Média Móvel', line = list(color="rgb(220,20,60)",width = 3, dash = 'dot'),type='scatter') %>% 
+layout(annotations = list(a),xaxis = list(title = "Mês"), yaxis = list (title = "Óbitos confirmados por dia"),title = 'Óbitos por Covid-19 no estado do Rio de Janeiro ',autosize = F, width = 850, height = 500, margin = m) %>%
+
+config(locale = "pt-br")
+
+fig
+
+```
+
+Os principais veículos televisivos brasileiros (Globo, por exemplo) recorrem a médias móveis para descrever se uma determinada localidade, em geral, um estado ou capital, deve se alertar para um possível crescimento de casos ou óbitos decorrentes da Covid-19. 
+
+Define-se taxa de médias móveis como a razão da média (para casos ou óbitos) dos 7 últimos dias em relação à média de duas semanas atrás, em outras palavras, uma razão de médias móveis. Para facilitar a interpretação, as variações são deslocadas em -1 unidade (centradas em 0%), ou seja, valores negativos indicam decréscimo de uma semana para outra, e, analogamente, valores positivos apontam para o crescimento de casos ou óbitos decorrentes da Covid-19.
+
+Por exemplo, se a última semana registrou 10% na variação das médias móveis, a interpretação direta é que houve um crescimento de 10% no registros de casos ou óbitos em relação a semana imediatamente anterior. Caso a taxa seja negativa, -10%, por exemplo, a interpretação é análoga: houve um decréscimo de 10% nos registros de casos ou óbitos em relação a semana imediatamente anterior. 
+
+
+Padroniza-se uma variação de 15\% para mais ou para menos como período de estabilização. Se esta taxa for menor ou igual a -15%, dizemos que há uma redução no número de casos ou óbitos. Enquanto taxas superiores a 15% indicam um crescimento de uma semana para outa. Repare no gráfico abaixo que, pelas taxas móveis, não há evidências de estabilização dos casos de Covid-19 no estado do Rio de Janeiro para o último mês registrado. Destacamos visualmente no gráfico por meio do ponto de exclamação, o instante de tempo correspondente 14 dias após a reabertura comercial e escolar no município do Rio de Janeiro, apresentando a maior taxa móvel de casos de Covid-19 durante todo o período de observação possível (1 de abril até 23 de outubro de 2020). 
+
+```{r,message=FALSE,warning=F,echo=F}
+tx = vector()
+ma1 = movavg(estado_rj$new_confirmed, n = 7)
+ma2 = movavg(estado_rj$new_confirmed, n = 14)
+
+for (i in (14+7):length(ma1)){tx[i+1-(14+7)] <- ma1[i]/ma2[i]}
+
+txp = tx-1
+
+global = mean(estado_rj$new_confirmed)
+
+m <- list(
+  l = 50,
+  r = 240,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+a <- list(
+  x = ymd("2020-07-25"),
+  y = 0.58,
+  text = "!",
+  xref = "x",
+  yref = "y",
+  showarrow = TRUE,
+  arrowhead = 10,
+  arrowsize = 2,
+  ax = 20,
+  ay = -40,
+  font = list( size = 25)
+)
+
+data = ymd(estado_rj$date[21:length(ma1)])
+df   = data.frame(txp,data)
+
+df = df[8:length(txp),]
+liminf  = rep(-0.15,dim(df)[1])
+limsup  = rep(0.15,dim(df)[1])
+
+
+fig <- plot_ly(df, x = ~data, y = ~txp ,name = "Taxa móvel", names = NULL, type = 'scatter', mode = 'lines',line = list(color = "	rgb(100,149,237)", width = 3)) %>% 
+add_trace(y = ~liminf, name = 'Cota inferior', line = list(color="rgb(255,69,0)",width = 3, dash = 'dot'),type='scatter') %>% 
+add_trace(y = ~limsup, name = 'Cota superior', line = list(color="rgb(255,69,0)",width = 3, dash = 'dot'),type='scatter') %>% 
+layout(annotations = list(a),xaxis = list(title = "Mês"), yaxis = list (title = "Variação da média móvel",tickformat = "%"),title = 'Variação da média móvel dos casos confirmados por Covid-19 no estado do Rio de Janeiro ',autosize = F, width = 850, height = 500, margin = m) %>% config(locale = "pt-br")
+
+fig
+
+```
+
+Já quando consideramos os óbitos registrados em decorrência da Covid-19, pelas taxas móveis, percebe-se novamente um cenário diferente em relação ao dos casos confirmados. Veja no gráfico abaixo que o único período em que os óbitos decorrentes da Covid-19 no estado do Rio de Janeiro mantiveram-se por mais de 1 mês completo dentro da faixa de estabilidade (região delimitada pelas retas laranjas tracejadas) foi justamente a janela de tempo observada de 23 de setembro até o último dia de observação, 23 de outubro. 
+
+
+```{r,message=FALSE,warning=F,echo=F}
+tx = vector()
+ma1 = movavg(estado_rj$new_deaths, n = 7)
+ma2 = movavg(estado_rj$new_deaths, n = 14)
+
+for (i in (14+7):length(ma1)){tx[i+1-(14+7)] <- ma1[i]/ma2[i]}
+
+txp = tx-1
+
+global = mean(estado_rj$new_deaths)
+
+m <- list(
+  l = 50,
+  r = 240,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+a <- list(
+  x = ymd("2020-07-25"),
+  y = 0.58,
+  text = "!",
+  xref = "x",
+  yref = "y",
+  showarrow = TRUE,
+  arrowhead = 10,
+  arrowsize = 2,
+  ax = 20,
+  ay = -40,
+  font = list( size = 25)
+)
+
+data = ymd(estado_rj$date[21:length(ma1)])
+df   = data.frame(txp,data)
+
+df = df[8:length(txp),]
+liminf  = rep(-0.15,dim(df)[1])
+limsup  = rep(0.15,dim(df)[1])
+
+
+fig <- plot_ly(df, x = ~data, y = ~txp ,name = "Taxa móvel", names = NULL, type = 'scatter', mode = 'lines',line = list(color = "	rgb(100,149,237)", width = 3)) %>% 
+add_trace(y = ~liminf, name = 'Cota inferior', line = list(color="rgb(255,69,0)",width = 3, dash = 'dot'),type='scatter') %>% 
+add_trace(y = ~limsup, name = 'Cota superior', line = list(color="rgb(255,69,0)",width = 3, dash = 'dot'),type='scatter') %>% 
+layout(xaxis = list(title = "Mês"), yaxis = list (title = "Variação da média móvel",tickformat = "%"),title = 'Variação da média móvel dos óbitos por Covid-19 no estado do Rio de Janeiro ',autosize = F, width = 850, height = 500, margin = m) %>% config(locale = "pt-br")
+
+fig
+
+```
+
+
+A média móvel mesmo sendo simples em termos matemáticos, oferece interpretações bastante razoáveis. Justamente por sua simplicidade, funcionalidade e fácil entendimento, tanto da sua formulação quanto dos seus resultados, a média móvel se popularizou nos veículos de informação.
+
+<br>
+
+### Fonte
+
+Secretariais municipais de saúde através do [Data.Rio](https://www.data.rio/) e do [Brasil.io](https://brasil.io/home/).
+
+<br>
+
+**Período dos dados analisados**: 5 de março a 23 de outubro de 2020.
+ 
+
