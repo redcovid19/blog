@@ -82,14 +82,14 @@ Logo, de maneira informal, podemos considerar a média móvel do dia 23 como:
 <br>
 
 <span class='img_container center' style='display: inline-block;'>
-    <img alt='media_movel' src='https://i.imgur.com/xvorRDH.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <img alt='media_movel' src='https://i.imgur.com/hVgVum4.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
 <br>
 
 <span class='img_container center' style='display: inline-block;'>
-    <img alt='media_movel' src='https://i.imgur.com/bSjEU7k.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <img alt='media_movel' src='https://i.imgur.com/vmrFNB2.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
