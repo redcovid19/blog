@@ -52,13 +52,6 @@ Um tipo de gráfico que pode resumir esta informação é um mapa animado, em qu
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
-<iframe class="imgur-embed" width="100%" height="601" frameborder="0" src="https://i.imgur.com/SATG5C2.gifv#embed"></iframe>
-
-<img src="https://i.imgur.com/SATG5C2.gifv#embed" alt="this slowpoke moves"  width=250/>
-
-<img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width=250/>
-
-[Imgur](https://i.imgur.com/SATG5C2.gifv)
 
   Neste gráfico, podemos ver inicialmente um domínio da cidade do Rio de Janeiro e da região metropolitana em relação ao número de casos, e com o passar do tempo as cores mais fortes se intensificam no norte do Estado. 
   
@@ -78,12 +71,11 @@ A primeira notificação de óbito por Covid-19 no estado do Rio de Janeiro foi 
 
 
 <span class='img_container center' style='display: inline-block;'>
-    <img alt='obito' src='https://i.imgur.com/78Zm1LD.gifv#embed' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <img alt='obito' src='https://i.imgur.com/78Zm1LD.gif' style='display:block; margin-left: auto; margin-right: auto;' title='' />
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
 
-<iframe class="imgur-embed" width="100%" height="601" frameborder="0" src="https://i.imgur.com/78Zm1LD.gifv#embed"></iframe>
 
 
  Interessado em verificar a evolução para o seu município? O gráfico abaixo apresenta a evolução temporal do número de casos por 100 mil habitantes para os 92 municípios do Rio de Janeiro. Basta clicar duas vezes no nome de seu município na direita para ver apenas a linha referente a este.
