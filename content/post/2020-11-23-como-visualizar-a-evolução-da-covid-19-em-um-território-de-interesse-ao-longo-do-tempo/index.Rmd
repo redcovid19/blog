@@ -48,11 +48,17 @@ Em posts anteriores vimos como estão distribuídos geograficamente (espacialmen
 Um tipo de gráfico que pode resumir esta informação é um mapa animado, em que a cada passo da animação é mostrada a distribuição espacial da variável de interesse para um instante no tempo. O mapa abaixo mostra a evolução do número de casos confirmados de Covid-19 por 100 mil habitantes para cada um dos 92 municípios do estado do Rio de Janeiro, diariamente, desde 01/04/2020 até 23/10/2020. No mapa, as cores mais claras representam os menores números de casos por 100 mil habitantes, e as cores mais escuras, o contrário. 
 
 <span class='img_container center' style='display: inline-block;'>
-    <img alt='casos' src='https://i.imgur.com/SATG5C2.gifv#embed' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <img alt='casos' src='https://i.imgur.com/SATG5C2.gif' style='display:block; margin-left: auto; margin-right: auto;' title='' />
     <span class='img_caption' style='display: block; text-align: center;'></span>
 </span>
 
 <iframe class="imgur-embed" width="100%" height="601" frameborder="0" src="https://i.imgur.com/SATG5C2.gifv#embed"></iframe>
+
+<img src="https://i.imgur.com/SATG5C2.gifv#embed" alt="this slowpoke moves"  width=250/>
+
+<img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width=250/>
+
+[Imgur](https://i.imgur.com/SATG5C2.gifv)
 
   Neste gráfico, podemos ver inicialmente um domínio da cidade do Rio de Janeiro e da região metropolitana em relação ao número de casos, e com o passar do tempo as cores mais fortes se intensificam no norte do Estado. 
   
