@@ -1,0 +1,137 @@
+---
+title: Como visualizar a evolução da Covid-19 em um território de interesse ao longo
+  do tempo?
+author: ''
+date: '2020-11-23'
+slug: []
+categories:
+  - Covid19
+  - Rio de Janeiro
+tags:
+  - número de casos
+  - óbitos
+  - mapa covid19
+  - gráfico interativo
+---
+
+
+**Por Guilherme dos Santos**
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = F, message = F)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(kableExtra)
+
+municipios_rj <- read.csv2("data/municpios_rj.csv", row.names = 1)
+
+
+```
+
+
+```{r}
+dados<- municipios_rj
+dados <- dados %>% 
+  rename(confirmed_per_100k = last_available_confirmed_per_100k_inhabitants) %>% 
+  mutate(date = ymd(date),
+         city_ibge_code = as.numeric(city_ibge_code),
+         confirmed_per_100k = round(as.numeric(confirmed_per_100k), 2))
+
+```
+
+Em posts anteriores vimos como estão distribuídos geograficamente (espacialmente) os [números de casos e de óbitos por 100 mil habitantes no estado do Rio de Janeiro](https://rioemdados.netlify.app/post/n%C3%BAmero-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/) e como se deu a [evolução temporal dos casos e óbitos acumulados e diários](https://rioemdados.netlify.app/post/o-comportamento-do-n%C3%BAmero-de-casos-e-%C3%B3bitos-di%C3%A1rios-e-acumulados-referentes-a-covid-19-no-rio-de-janeiro/). Mas é possível unir estas duas informações (espacial e temporal)? Nosso objetivo neste post é visualizar a evolução da distribuição espacial do número de casos e óbitos por Covid-19 ao longo do tempo, também conhecida como evolução espaço-temporal. 
+
+Um tipo de gráfico que pode resumir esta informação é um mapa animado, em que a cada passo da animação é mostrada a distribuição espacial da variável de interesse para um instante no tempo. O mapa abaixo mostra a evolução do número de casos confirmados de Covid-19 por 100 mil habitantes para cada um dos 92 municípios do estado do Rio de Janeiro, diariamente, desde 01/04/2020 até 23/10/2020. No mapa, as cores mais claras representam os menores números de casos por 100 mil habitantes, e as cores mais escuras, o contrário. 
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='casos' src='https://i.imgur.com/SATG5C2.gifv#embed' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+
+  Neste gráfico, podemos ver inicialmente um domínio da cidade do Rio de Janeiro e da região metropolitana em relação ao número de casos, e com o passar do tempo as cores mais fortes se intensificam no norte do Estado. 
+  
+ As primeiras cidades a apresentarem notificação de casos foram Barra Mansa, Rio de Janeiro e Niterói. No pico da contaminação foram notificados 6061 casos no mesmo dia (19/06/2020) no estado do Rio de Janeiro. Vale notar também que municípios como Varre-Sai e Laje do Muriaé atingem cores mais intensas mais rapidamente após a notificação do primeiro caso, parte disto é devido ao seu baixo número de habitantes (para saber mais sobre isto, visite nosso [post anterior](https://rioemdados.netlify.app/post/n%C3%BAmero-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/)!).
+ 
+ Na dúvida sobre onde ficam os municípios mencionados no texto?! Para melhor guiar o leitor, o mapa abaixo mostra os municípios do estado do Rio de Janeiro coloridos de acordo com sua mesorregião.
+ 
+ 
+ <span class='img_container center' style='display: inline-block;'>
+    <img alt='mapa' src='https://i.imgur.com/YGJgRIZ.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+O mesmo tipo de visualização pode ser feita para o número de óbitos por 100 mil habitantes. Diferente do gráfico anterior, neste podemos observar que o Rio de Janeiro é o município que mais se destaca ao longo do tempo. Além disso, é possível observar como a evolução dos óbitos se dá inicialmente na região metropolitana no Rio de Janeiro, se alastrando para o resto do estado posteriormente.
+
+A primeira notificação de óbito por Covid-19 no estado do Rio de Janeiro foi de uma moradora do município de Miguel Pereira, e o segundo óbito ocorreu em Niterói, ambas no dia 17/03/2020. Municípios do interior do Rio de Janeiro como Varre-Sai, São José de Ubá e Laje do Muriaé mostraram uma evolução mais tardia da epidemia se tratando do número de óbitos, estando entre os últimos municípios a notificarem mortes em decorrência de Covid-19. O último município a registrar o primeiro óbito por Covid-19 foi Trajano de Moraes. No dia 3 de junho de 2020 ocorreu o maior número de mortes por Covid-19 no estado do Rio de Janeiro: 324 óbitos em um único dia.
+
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='obito' src='https://i.imgur.com/78Zm1LD.gifv#embed' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+ Interessado em verificar a evolução para o seu município? O gráfico abaixo apresenta a evolução temporal do número de casos por 100 mil habitantes para os 92 municípios do Rio de Janeiro. Basta clicar duas vezes no nome de seu município na direita para ver apenas a linha referente a este.
+
+```{r}
+municipios_rj$Data <- as.Date(municipios_rj$date)
+municipios_rj$Casos <- municipios_rj$last_available_confirmed_per_100k_inhabitants
+municipios_rj$Cidade <- municipios_rj$city
+
+municipios_rj %>%
+ggplot( aes(x=Data, y=Casos, group=Cidade, color=Cidade)) +
+    geom_line() +
+    ggtitle("Casos confirmados por 100 mil habitantes \npor município no Rio de Janeiro") +
+    theme_minimal() + scale_x_date(date_labels = "%b %Y") +
+  theme(legend.title=element_blank())-> fig
+
+
+a <- ggplotly(fig) %>%
+  config(locale = "pt-br")
+
+a
+```
+
+Para verificar a evolução temporal do número de óbitos acumulados por 100 mil habitantes em um município utilize o gráfico abaixo. Da mesma maneira do gráfico anterior, basta dar dois cliques no município de interesse.
+
+```{r}
+
+dados %>%
+  mutate(last_available_deaths = as.numeric(last_available_deaths),
+         obitos_por_100mil = round(last_available_deaths/estimated_population_2019*10^5,2)) -> dados
+
+dados -> municipios_rj
+municipios_rj$Data <- as.Date(municipios_rj$date)
+municipios_rj$Cidade <- municipios_rj$city
+municipios_rj$`Óbitos` <- municipios_rj$obitos_por_100mil
+
+
+municipios_rj %>%
+ggplot( aes(x=Data, y = Óbitos, group=Cidade, color=Cidade)) +
+    geom_line() +
+    ggtitle("Óbitos por 100 mil habitantes por município \nno Rio de Janeiro") +
+    theme_minimal() +
+  scale_x_date(date_labels = "%b %Y") +
+  theme(legend.title=element_blank())-> fig
+
+
+a <- ggplotly(fig) %>%
+  config(locale = "pt-br")
+
+a
+```
+
+
+<br>
+
+### Fonte
+
+Secretariais municipais de saúde através do [Data.Rio](https://www.data.rio/) e do [Brasil.io](https://brasil.io/home/).
+
+<br>
+
+**Período dos dados analisados**: 5 de março a 23 de outubro de 2020.
