@@ -19,6 +19,7 @@ ________________________________________________________________________________
 | João Batista de Morais Pereira | [Currículo Lattes](http://lattes.cnpq.br/5251604111283337) |
 | Kelly Cristina Mota Gonçalves | [Currículo Lattes](http://lattes.cnpq.br/1715326722961736) |
 | Larissa de Carvalho Alves | [Currículo Lattes](http://lattes.cnpq.br/1421662873815592) |
+| Lucas Ferreira Cabral | [Currículo Lattes](http://lattes.cnpq.br/3140612417455458) |
 | Rafael Cabral Fernandez | [Currículo Lattes](http://lattes.cnpq.br/1018588066836796) |
 | Renata Souza Bueno | [Currículo Lattes](http://lattes.cnpq.br/9548889525842597) |
 | Tais da Silva Figueiredo | [Currículo Lattes]() |
