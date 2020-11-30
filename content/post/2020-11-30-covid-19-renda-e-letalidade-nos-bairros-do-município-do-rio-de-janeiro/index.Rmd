@@ -1,0 +1,332 @@
+---
+title: 'Covid-19: Renda e letalidade nos bairros do município do Rio de Janeiro'
+author: Taís Figueiredo e Camila Rodrigues
+date: '2020-11-30'
+slug: []
+categories:
+  - Covid19
+  - Rio de Janeiro
+tags:
+  - mapa covid19
+  - número de casos
+  - óbitos
+  - gráfico interativo
+  - letalidade
+  - renda
+---
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(leaflet)
+library(dplyr)
+library(geojsonio)
+library(readr)
+library(sp)
+library(ggplot2)
+library(plotly)
+library(readxl)
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#-------------------- RENDA
+
+renda <- read_excel("data/2248.xls", sheet = "IDS e Indicadores_2010")
+names(renda) = c("Bairros", "ids", "agua", "esgoto", "lixo", "banheiro", "analfabetismo", "renda", "renda2", "renda3")
+
+renda = renda %>% select(Bairros, renda)
+
+renda = renda[9:225,]
+renda = na.omit(renda)
+
+
+#------------------- COVID
+dados_covid <- read_delim("data/Dados_indiv_MRJ_covid_19.csv", 
+                          "\t", escape_double = FALSE, trim_ws = TRUE)
+dados_covid$dt_notific = as.Date(dados_covid$dt_notific , "%d/%m/%y")
+colnames(dados_covid)[4] = "Bairros"
+
+
+#Calculando os casos confirmados 
+dados_covid_total <-  dados_covid %>% select("dt_notific", "Bairros", "evolucao") %>% mutate(aux = 1) %>% arrange(dt_notific) %>%  group_by(Bairros) %>% mutate(Soma = sum(aux)) %>% distinct(Bairros, .keep_all = T) %>%  select(Bairros, Soma)
+
+#Calculando o total de ?bitos
+dados_covid_obitos = dados_covid %>% select("dt_notific", "Bairros", "evolucao") %>% filter(evolucao == "obito") %>% mutate(aux = 1) %>% arrange(dt_notific) %>%  group_by(Bairros) %>% mutate(Soma_obito = sum(aux))  %>% distinct(Bairros, .keep_all = T) %>%  select(Bairros, Soma_obito)
+
+dados_covid_taxa = merge(dados_covid_obitos, dados_covid_total, by = "Bairros")
+
+#Calculando a taxa de letalidade
+dados_covid_taxa$Taxa_letalidade =(dados_covid_taxa$Soma_obito/dados_covid_taxa$Soma)*100
+
+rm(dados_covid_obitos)
+rm(dados_covid_total)
+
+
+#------------- CODIGO BAIRRO
+codigo_bairro_M <- read_delim("data/codigo_bairro.csv", 
+                              "\t", escape_double = FALSE, trim_ws = TRUE)
+
+codigo_bairro_m <- read_delim("data/codigo_bairro_m.csv", 
+                              "\t", escape_double = FALSE, trim_ws = TRUE)
+
+
+#------------ UNINDO BASES AO CODIGO
+
+covid = left_join(codigo_bairro_M, dados_covid_taxa, by = "Bairros")
+
+renda = left_join(codigo_bairro_m, renda, by = "Bairros")
+
+#----------- UNINDO LETALIDADE E RENDA
+
+renda = renda %>% select(CODBAIRRO, renda)
+
+dados = merge(covid, renda, by = "CODBAIRRO", all=F)
+
+dados$renda = as.numeric(dados$renda)
+
+rm(codigo_bairro_m)
+rm(codigo_bairro_M)
+rm(covid)
+rm(dados_covid)
+rm(dados_covid_taxa)
+rm(renda)
+
+```
+
+<br>
+
+Possivelmente, a maior incógnita sobre a Covid-19 é o verdadeiro número de pessoas no mundo que contraíram o vírus. Sem esses dados, não se pode calcular uma taxa de letalidade precisa. A letalidade mede a severidade de uma doença e é definida como a proporção de mortes dentre aqueles doentes por uma causa específica em um certo período de tempo. A taxa de letalidade é calculada dividindo-se o número de óbitos pelo número de casos. Então, uma taxa de 0,1%, por exemplo, significa que a cada mil pessoas contagiadas, 1 pessoa vai a óbito.<br  />
+
+Taxas altas podem indicar que existe uma grande subnotificação no registro de casos, sendo então reportados apenas os casos mais graves, ou que o sistema de saúde não esteja conseguindo atender a demanda da população. Diversos estados do país, desde o início do isolamento, reportaram esgotamento dos leitos disponíveis para tratamento dos infectados pela doença, tanto nos hospitais da rede pública quanto da rede privada. Em contrapartida, o fato de haver milhares de infectados assintomáticos ou com sintomas leves torna mais difícil identificar o real motivo desta taxa no Brasil, que atualmente está em aproximadamente 2,9%.<br  />
+
+
+A figura abaixo apresenta a taxa de letalidade dos dez países com maior número absoluto de mortes por Covid-19, até o dia 28 de outubro de 2020.</br  />
+
+<br>
+
+**Figura 1: Taxa de letalidade da Covid-19 dos dez países com maiores números absolutos de mortes (%).**
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='taxa_paises' src='https://i.imgur.com/qJt8xRV.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+<font size="2.75"> *Fonte dos dados: CNN health.*</font></br  />
+
+<br>
+
+A partir do gráfico não é possível identificar se a doença afeta de forma mais grave os países menos desenvolvidos, mas é possível fazer uma análise dentro de cada país observando regiões, estados, cidades ou bairros com menores rendas per capita.</br  />
+
+A Figura 2 mostra os dez estados com as maiores taxas de letalidade no Brasil, evidenciando a disparidade do Estado do Rio de Janeiro em relação aos demais, sendo então o Estado com maior taxa, ficando a frente até mesmo de São Paulo que possui o maior número de infectados e óbitos em números absolutos do país.</br  />
+
+<br>
+**Figura 2: Dez estados do Brasil com maiores taxas de letalidade (%).**
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='taxa_estados' src='https://i.imgur.com/GTb60aP.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+<font size="2.75"> *Fonte dos dados: Secretarias Estauais de Saúde.*</font></br  />
+
+<br>
+
+
+A partir dos dados obtidos no Censo 2010, foi possível fazer uma breve análise do desenvolvimento da Covid-19 nos bairros da cidade do Rio de Janeiro em paralelo à renda per capita em cada bairro.</br  />
+
+
+Os mapas e gráficos a seguir sugerem que existe uma relação entre as taxas de letalidade com a distribuição de renda na cidade, tornando possível identificar que as maiores taxas de letalidade se dão nas áreas mais pobres, sobretudo nas comunidades.</br  />
+
+
+De início, na Figura 3, o mapa da taxa de letalidade por bairros mostra em azul mais escuro as maiores taxas, e em azul mais claro, as mais baixas, evidenciando a discrepância no número de óbitos à medida que se aproxima da Zona Sul da cidade. Os dados são referentes até o dia 28 de Outubro de 2020.</br  />
+
+ **Figura 3: Taxa de letalidade (%) da Covid-19 por bairro no município do Rio de Janeiro.**
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align="left", fig.width=6, fig.height=6}
+
+mapa = geojson_read("data/b.geojson", what = "sp")
+
+mapa = merge(mapa, dados, by= "CODBAIRRO")
+
+dados2=dados$Taxa_letalidade
+dados2 = na.omit(dados2)
+
+
+bins = quantile(dados2, seq(0, 1, 0.1428571))
+bins[1] = 0.000
+
+rm(dados2)
+
+pal <- colorBin("Blues", domain = dados$Taxa_letalidade, bins = bins)
+
+
+#Função para conseguir utilizar o "decimal.mark" e modificar o separador de casa decimal de ponto(default) para vírgula 
+labelFormat_decimal <- function (prefix = "", suffix = "", between = " &ndash; ", digits = 3, 
+                                 big.mark = ",", transform = identity, decimal.mark = "."){
+  formatNum <- function(x) {
+    format(round(transform(x), digits), trim = TRUE, scientific = FALSE, 
+           big.mark = big.mark, decimal.mark = decimal.mark,nsmall=digits)
+  }
+  function(type, ...) {
+    switch(type, numeric = (function(cuts) {
+      paste0(prefix, formatNum(cuts), suffix)
+    })(...), bin = (function(cuts) {
+      n <- length(cuts)
+      paste0(prefix, formatNum(cuts[-n]), between, formatNum(cuts[-1]), 
+             suffix)
+    })(...), quantile = (function(cuts, p) {
+      n <- length(cuts)
+      p <- paste0(round(p * 100), "%")
+      cuts <- paste0(formatNum(cuts[-n]), between, formatNum(cuts[-1]))
+      paste0("<span title=\"", cuts, "\">", prefix, p[-n], 
+             between, p[-1], suffix, "</span>")
+    })(...), factor = (function(cuts) {
+      paste0(prefix, as.character(transform(cuts)), suffix)
+    })(...))
+  }
+}
+
+
+mapa = leaflet(mapa) %>%
+  addTiles("Taxa de letalidade") %>%
+  addPolygons( fillColor = ~pal(Taxa_letalidade), weight = 0.5,
+  opacity = 1,
+  color = "black",
+  dashArray = "2",
+  fillOpacity = 1,
+
+              label = ~paste0(NOME, ": ", formatC(Taxa_letalidade, decimal.mark = ",")))%>%
+ addLegend(pal = pal, values = ~Taxa_letalidade, opacity = 0.7, title = "Taxa de letalidade (%)", 
+    position = "bottomright", labFormat = labelFormat_decimal(suffix = "", decimal.mark=",",
+                                    digits = 3, big.mark = "."))
+
+mapa
+```
+<font size="2.75"> *Fonte dos dados: Prefeitura do Rio de Janeiro.*</font></br/>
+<font size="2.75"> *Nota: NA corresponde aos bairros que não notificaram casos de Covid-19.*</font></br  />
+
+<p>O próximo mapa, na Figura 4, mostra a distribuição do rendimento domiciliar per capita em salários mínimos por bairro no município do Rio de Janeiro segundo os dados do Censo de 2010. É possível observar as rendas mais altas com as cores em verde mais escuro, enquanto as mais claras mostram os bairros com rendas mais baixas.</p>
+
+Considera-se como renda domiciliar per capita a soma dos rendimentos mensais dos moradores do domicílio, em reais, dividida pelo número de seus moradores. Para que obtenha-se tais números em salários mínimos, é preciso dividir a renda domiciliar per capita pelo salário mínimo do ano de referência (2010), que no caso, corresponde ao valor de R$ 510,00.</br  />
+
+**Figura 4: Renda domiciliar per capita em salários mínimos por bairro do município do Rio de Janeiro.**
+```{r, echo=FALSE, warning= FALSE,  fig.align="left", fig.width=6, fig.height=6}
+
+mapa = geojson_read("data/b.geojson", what = "sp")
+
+mapa = merge(mapa, dados, by= "CODBAIRRO")
+
+
+bins <- c(0.503 , 1.01, 1.245 , 1.464 ,1.757, 2.338, 3.724, 11.082  )
+
+
+
+pal <- colorBin("Greens", domain = dados$renda, bins = bins)
+
+
+#Função para conseguir utilizar o "decimal.mark" e modificar o separador de casa decimal de ponto(default) para vírgula 
+labelFormat_decimal <- function (prefix = "", suffix = "", between = " &ndash; ", digits = 3, 
+                                 big.mark = ",", transform = identity, decimal.mark = "."){
+  formatNum <- function(x) {
+    format(round(transform(x), digits), trim = TRUE, scientific = FALSE, 
+           big.mark = big.mark, decimal.mark = decimal.mark,nsmall=digits)
+  }
+  function(type, ...) {
+    switch(type, numeric = (function(cuts) {
+      paste0(prefix, formatNum(cuts), suffix)
+    })(...), bin = (function(cuts) {
+      n <- length(cuts)
+      paste0(prefix, formatNum(cuts[-n]), between, formatNum(cuts[-1]), 
+             suffix)
+    })(...), quantile = (function(cuts, p) {
+      n <- length(cuts)
+      p <- paste0(round(p * 100), "%")
+      cuts <- paste0(formatNum(cuts[-n]), between, formatNum(cuts[-1]))
+      paste0("<span title=\"", cuts, "\">", prefix, p[-n], 
+             between, p[-1], suffix, "</span>")
+    })(...), factor = (function(cuts) {
+      paste0(prefix, as.character(transform(cuts)), suffix)
+    })(...))
+  }
+}
+
+
+mapa = leaflet(mapa) %>%
+  addTiles("renda") %>%
+  addPolygons( fillColor = ~pal(renda), weight = 0.5,
+  opacity = 1,
+  color = "black",
+  dashArray = "2",
+  fillOpacity = 1,
+              label = ~paste0(NOME, ": ", formatC(renda, big.mark = ",")))%>%
+  addLegend(pal = pal, values = ~renda, opacity = 0.7, title = "Renda em salários mínimos",
+    position = "bottomright",labFormat = labelFormat_decimal(suffix = "", decimal.mark=",",
+                                    digits = 3, big.mark = "."))
+
+mapa
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Pereira Passos e Prefeitura do Rio de Janeiro.*</font></br/>
+<font size="2.75"> *Nota: Dados referentes ao Censo 2010, em que o salário mínimo correspondia ao valor de R$510,00. NA corresponde aos bairros para os quais não há informação.*</font></br  />
+
+
+<p>Fazendo um paralelo entre ambos os mapas (Figuras 3 e 4), é possível estabelecer uma ligação entre os bairros de menores rendas e os bairros de maiores taxas de letalidade. </br />
+
+
+Os box-plots da Figura 5 apresentam as distribuições das taxas de letalidade, respectivamente, para bairros com menores rendas e bairros com maiores rendas, em que observa-se uma diferença evidente. Os dez bairros com as menores rendas obtiveram uma taxa mediana de aproximadamente 13,7%, comparados aos dez bairros com as maiores rendas, que obtiveram taxa de letalidade mediana de aproximadamente 5,0%. A informação sobre as rendas por bairros foram coletadas do Instituto Pereira Passos e são referentes ao Censo de 2010.</br  />
+
+**Figura 5: Gráfico box-plot das taxas de letalidade (%) dos dez bairros com as menores rendas e dos dez bairros com as maiores rendas.**
+```{r, echo=FALSE, warning=FALSE, fig.align="left", fig.width=6, fig.height=6}
+top10mais = dados %>% arrange(desc(renda))
+top10mais = top10mais[1:10,]
+
+top10menos = dados %>% arrange(renda)
+top10menos = top10menos[1:10,]
+
+
+fig <- plot_ly( y = top10menos$Taxa_letalidade, type = "box", name = "Menores rendas")
+fig <- fig %>% add_trace(y = top10mais$Taxa_letalidade, name = "Maiores rendas")
+fig <- fig %>% layout(separators= ',', title = "",
+                      yaxis = list (title = 'Taxa de letalidade da covid-19 (%)'))
+fig
+```
+<font size="2.75"> *Fonte dos dados: Instituto Pereira Passos e Prefeitura do Rio de Janeiro.*</font></br  />
+
+
+<p>O gráfico de dispersão, apresentado na Figura 6, retrata justamente esta associação entre renda e taxa de letalidade entre 158 bairros da cidade do Rio de Janeiro, onde é possível observar uma relação decrescente, aparentemente exponencial, em que à medida que a renda aumenta a taxa de letalidade diminui.</br  />
+
+**Figura 6: Gráfico de dispersão entre taxa de latalidade (%) e renda dos bairros do município do Rio de Janeiro.**
+```{r, echo=FALSE, warning= FALSE, message= FALSE,  fig.align="left", fig.width=6, fig.height=6}
+dados2 = na.omit(dados)
+dados2 = dados2[,-1]
+
+#plot(dados$Grupo, dados$Taxa_letalidade)
+
+#scat = plot_ly(x = dados2$renda, y = dados2$Taxa_letalidade, type = "scatter") 
+scat = plot_ly(dados2, x= ~renda, y= ~Taxa_letalidade, text = dados2$Bairros)
+scat <- scat %>% layout(separators= ',',
+                        title = '',
+         xaxis = list(title = 'Renda per capita por bairro'),
+         yaxis = list (title = 'Taxa de letalidade da covid-19 (%)'))
+scat
+```
+<font size="2.75"> *Fonte dos dados: Instituto Pereira Passos e Prefeitura do Rio de Janeiro.*</font></br  />
+
+
+É importante ressaltar que há grandes indícios de que os casos nas zonas de menor renda sejam subnotificados, haja vista a baixa quantidade de testes realizados, sendo assim, grande parte da população de baixa renda fica sem o diagnóstico positivo da doença, logo, não entram nas estatísticas, sendo notificados apenas os casos mais graves. Há no entanto, painéis de algumas organizações não governamentais que abordam e dão visibilidade justamente a este aspecto, divulgando estimativas mais próximas dos valores reais dos números de infectados e de óbitos em inúmeras comunidades do Estado do Rio de Janeiro.</br  />
+
+<br>
+
+### Fonte
+
+- [Prefeitura do Rio de Janeiro](http://prefeitura.rio/coronavirus)
+
+- [Instituto Pereira Passos](http://www.data.rio/)
+
+- [CNN health](https://edition.cnn.com/interactive/2020/health/coronavirus-maps-and-cases/)
+
+- Censo de 2010
+
+- [Secretarias Estaduais de Saúde](https://covid.saude.gov.br/)
+
+
+
