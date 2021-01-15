@@ -1,0 +1,413 @@
+---
+title: Qual perfil das pessoas que usufruem do privilégio de trabalhar em home office?
+author: Tais
+date: '2021-01-15'
+slug: []
+categories:
+  - Covid19
+  - Home Office
+tags:
+  - gráfico interativo
+  - home office
+  - renda
+---
+
+```{r, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(plotly)
+library(plyr)
+library(flexdashboard)
+library(tidyverse)
+library(dplyr)
+library(srvyr) 
+library(readr)
+library(ggplot2)
+library(Cairo)
+library(janitor)
+library(geojsonio)
+library(leaflet)
+library(readxl)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+pnad_com_pesos_mapa <- readRDS("data/pnad_com_pesos_mapa.rds")
+pnad_com_pesos <- readRDS("data/pnad_com_pesos.rds")
+
+```
+
+
+
+
+
+ O home office trata-se do regime de trabalho remoto que permite que o colaborador trabalhe a distância, desde que disponha das ferramentas necessárias para tal.
+ 
+Esse estilo de serviço ficou mais popularizado durante a pandemia, em que muitas empresas optaram por essa forma de trabalho para aderirem às medidas de distanciamento social.
+
+A seguir, o Figura 1 retrata a taxa de pessoas que trabalham em home office nos estados brasileiros. Essa medida foi calculada como a razão entre a estimativa de pessoas que estão nesse estilo de serviço pela estimativa de pessoas que estão trabalhando, presencialmente ou não. As cores mais claras indicam menores taxas, enquanto as mais escuras apontam taxas maiores. Baseado nisso, observa-se que as maiores taxas se concentram nas regiões do Sul e Sudeste e em alguns estados do Nordeste, como Paraíba, Rio Grande do Norte, Sergipe e Pernambuco. <br  />
+
+  
+**Figura 1: Mapa da taxa de pessoas em home office nos Estados brasileiros. (%)**
+  
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+home_mapa<- pnad_com_pesos_mapa %>%
+  group_by( UF) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  )
+
+home_mapa$pessoas_homeoffice = (home_mapa$home_office/home_mapa$mao_de_obra)*100
+home_mapa$pessoas_homeoffice = round(home_mapa$pessoas_homeoffice,1)
+
+colnames(home_mapa)[1]= "codigo_ibg"
+
+mapa = geojson_read("data/br_states.geojson", what = "sp")
+
+home_mapa= as.data.frame(home_mapa)
+home_mapa$codigo_ibg= as.character(home_mapa$codigo_ibg)
+
+mapa@data = left_join(mapa@data, home_mapa, by= "codigo_ibg")
+
+bins = quantile(home_mapa$pessoas_homeoffice, seq(0, 1, 0.1428571))
+
+bins[8] = max(home_mapa$pessoas_homeoffice)+1
+
+pal <- colorBin("Blues", domain = home_mapa$pessoas_homeoffice, bins = bins)
+
+
+labelFormat_decimal <- function (prefix = "", suffix = "", between = " &ndash; ", digits = 3, 
+                                 big.mark = ",", transform = identity, decimal.mark = "."){
+  formatNum <- function(x) {
+    format(round(transform(x), digits), trim = TRUE, scientific = FALSE, 
+           big.mark = big.mark, decimal.mark = decimal.mark,nsmall=digits)
+  }
+  function(type, ...) {
+    switch(type, numeric = (function(cuts) {
+      paste0(prefix, formatNum(cuts), suffix)
+    })(...), bin = (function(cuts) {
+      n <- length(cuts)
+      paste0(prefix, formatNum(cuts[-n]), between, formatNum(cuts[-1]), 
+             suffix)
+    })(...), quantile = (function(cuts, p) {
+      n <- length(cuts)
+      p <- paste0(round(p * 100), "%")
+      cuts <- paste0(formatNum(cuts[-n]), between, formatNum(cuts[-1]))
+      paste0("<span title=\"", cuts, "\">", prefix, p[-n], 
+             between, p[-1], suffix, "</span>")
+    })(...), factor = (function(cuts) {
+      paste0(prefix, as.character(transform(cuts)), suffix)
+    })(...))
+  }
+}
+
+
+mapa = leaflet(mapa) %>%
+  addTiles("Pessoas em home office (%)") %>%
+  addPolygons( fillColor = ~pal(pessoas_homeoffice), weight = 0.5,
+  opacity = 1,
+  color = "black",
+  dashArray = "2",
+  fillOpacity = 1,
+
+              label = ~paste0(nome, ": " ,formatC(pessoas_homeoffice, decimal.mark = ",")))%>%
+ addLegend(pal = pal, values = ~pessoas_homeoffice, opacity = 0.7, title = "Pessoas em home office (%)", 
+    position = "bottomright", labFormat = labelFormat_decimal(suffix = "", decimal.mark=",",
+                                    digits = 1, big.mark = "."))
+
+mapa
+
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  /> 
+<br />
+<p>
+Nos próximos gráficos vamos analisar o perfil dos indivíduos que fazem home office no município do Rio de Janeiro. Vale a pena enfatizar que as porcentagens a seguir, são feitas referentes a cada grupo, ou seja, é a proporção entre as pessoas que estão em home office de um determinado grupo e as pessoas que estão trabalhando pertencentes a este mesmo grupo, sendo assim, os resultados entre os grupos são independentes, não necessitando somar 100%.
+
+A partir das Figuras 2 e 3, observa-se que, dentre as mulheres que estão trabalhando, 28% estão em home office e, apenas 12,7% são pretos, evidenciado que pessoas pertencentes a este grupo são as que têm menos acesso ao trabalho remoto. <br  />
+
+</p>
+**Figura 2: Pessoas que estão em home office de acordo com sexo (%)**  
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+home_sexo <- pnad_com_pesos %>%
+  group_by(Sexo) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)) %>%
+  mutate(trab_home_office = (home_office/mao_de_obra)*100) 
+#home_sexo_cor = home_sexo_cor[,-c(7,8)]
+home_sexo = na.omit(home_sexo)
+
+
+
+# gráfico
+home_sexo_ssa <- ggplot(home_sexo, aes(fill = Sexo, y = trab_home_office, x = Sexo)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=0),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#4682B4","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ ggplotly(home_sexo_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+**Figura 3: Pessoas que estão em home office de acordo com a etnia (%)**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+############## Home office - Por Cor  ###########
+home_cor <- pnad_com_pesos %>%
+  group_by( Cor) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  ) 
+home_cor = home_cor[-3,]
+#home_cor = home_cor[-4,-c(6,7)]
+home_cor$trab_home_office = (home_cor$home_office/home_cor$mao_de_obra)*100
+home_cor = home_cor %>% arrange(desc(trab_home_office))
+
+
+# gráfico
+home_cor_ssa <- ggplot(home_cor, aes(fill = Cor, y = trab_home_office, x = Cor)) +
+    geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+ggplotly(home_cor_ssa)
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+<p>
+De acordo com as Figuras 4 e 5, cerca de 54% das pessoas que possuem nível de escolaridade pós-gradução e estão trabalhando, possuem a oportunidade de exercer sua função de maneira remota e nota-se que trabalhadores com níveis mais baixos de instrução não executam este mesmo tipo de trabalho de maneira expressiva, seja por não possuírem o suporte necessário para realizar as tarefas ou por pertencerem à classe de trabalhadores informais. Isso indica que quanto mais alta a escolaridade, maior a flexibilidade em relação à forma de executar seu trabalho, e maior a chance de se manterem empregados. Observa-se que o nível de escolaridade é um fator predominante para este tipo de serviço. Em paralelo a isso, temos que a faixa etária predominante é acima de 65 anos.</p>
+
+<br  />
+
+**Figura 4: Pessoas que estão em home office de acordo com escolaridade (%)**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+############## Home office -  Escolaridade ###########
+home_edu <- pnad_com_pesos %>%
+  group_by(Escolaridade) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  )  %>%
+  mutate(trab_home_office = (home_office/mao_de_obra)*100) 
+
+# gráfico
+home_edu_ssa <- ggplot(home_edu, aes(fill = Escolaridade, y = trab_home_office, x = Escolaridade)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)") 
+
+ggplotly(home_edu_ssa)
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+**Figura 5: Pessoas que estão em home office de acordo com faixa etária (%)**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+################## Home office - Idade ################
+home_idade <- pnad_com_pesos %>%
+  group_by( Idade) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  ) 
+#home_idade= home_idade[-7,-c(6:7)]
+home_idade$trab_home_office = (home_idade$home_office/home_idade$mao_de_obra)*100
+
+# gráfico
+home_idade_ssa <- ggplot(home_idade, aes(fill = Idade, y = trab_home_office, x = Idade)) +
+  geom_bar(position = "dodge", stat = "identity")+ 
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3", "#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")
+ggplotly(home_idade_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+Já nas Figuras 6 e 7, é possível notar que o setor público predomina nesta modalidade, seguido pelo setor privado, e que a faixa salarial predominante dos empregados fica acima de 5 salários mínimos, o que novamente evidencia as disparidades entre as oportunidades entre as classes mais baixas e mais altas.
+<br  />
+
+**Figura 6: Pessoas que estão em home office de acordo com tipo de trabalho (%)**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+################### Home office - Por trabalho ####################
+home_emprego <- pnad_com_pesos %>%
+  group_by(Tipo_emprego) %>%
+  summarise(
+    home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  ) 
+#home_emprego = home_emprego[-8, -c(6:7)]
+home_emprego = home_emprego %>%  mutate(trab_home_office = (home_office/mao_de_obra)*100) 
+  
+# ordenando eixo X
+legenda_trabalhos <- c("Trabalhador doméstico\n (empregado doméstico,\n cuidados, babá)",
+                       "Militar", 
+                       "Policial ou\n Bombeiro",
+                       "Setor privado",
+                       "Setor público",
+                       "Empregador",
+                       "Autônomo\n (Conta própria)")
+# Gráfico
+home_emprego_ssa <- ggplot(home_emprego, aes(fill = Tipo_emprego, y = trab_home_office, x = Tipo_emprego)) +
+    geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")
+
+ggplotly(home_emprego_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br />
+<br />
+
+**Figura 7: Pessoas que estão em home office de acordo com faixa salarial (%)**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+############## Home office - Por faixa salarial  ##############
+home_renda <- pnad_com_pesos %>%
+  group_by(Faixa_salario) %>%
+  summarise(
+     home_office = survey_total(C013 == 1, na.rm = TRUE),
+    mao_de_obra = survey_total(C001 == 1, na.rm = TRUE)
+  ) 
+#home_renda=home_renda[-7, -c(6:7)]
+home_renda=home_renda %>%   mutate(trab_home_office = (home_office / mao_de_obra) * 100) 
+  
+# gráfico
+home_renda_ssa <- ggplot(home_renda, aes(fill = Faixa_salario, y = trab_home_office, x = Faixa_salario)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3","#B3CDE3")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(home_renda_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+
+Portanto, a partir destes gráficos pode-se ter um palpite sobre o perfil das pessoas que conseguiram trabalhar em home office durante o mês de Outubro na cidade do Rio de Janeiro, sendo em sua maioria pessoas com ensino superior completo ou pós-graduação e com renda acima de cinco salários mínimos. Vale ressaltar que, com o trabalho remoto, essas pessoas possuem uma possibilidade maior de manter o distanciamento social e, desta forma, se proteger da Covid-19.
+  
+  </font>
+  </p>
+<br />  
+
+#### Fonte:
+
+- [Instituto Brasileiro de Geografia e Estatística (IBGE)](https://covid19.ibge.gov.br/pnad-covid/)
+ 
+
+- [Governo Federeal do Brasil](https://www.gov.br/pt-br)
+
+
+  
+
+
