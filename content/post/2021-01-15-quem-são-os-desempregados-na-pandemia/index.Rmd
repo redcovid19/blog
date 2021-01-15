@@ -1,0 +1,296 @@
+---
+title: Quem são os desempregados na pandemia?
+author: Tais
+date: '2021-01-15'
+slug: []
+categories:
+  - Desemprego
+  - Covid19
+tags:
+  - gráfico interativo
+  - desemprego
+  - auxílio emergencial
+---
+
+```{r, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(plotly)
+library(plyr)
+library(flexdashboard)
+library(tidyverse)
+library(dplyr)
+library(srvyr) 
+library(readr)
+library(ggplot2)
+library(Cairo)
+library(janitor)
+library(geojsonio)
+library(leaflet)
+library(readxl)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+pnad_com_pesos_mapa <- readRDS("data/pnad_com_pesos_mapa.rds")
+pnad_com_pesos <- readRDS("data/pnad_com_pesos.rds")
+
+```
+
+
+  
+
+O desemprego, segundo o IBGE, se refere às pessoas com idade de trabalhar (acima de 14 anos) que não estão trabalhando, mas estão disponíveis e tentam encontrar trabalho.
+
+A Figura 1 retrata a taxa de desocupação nos estados do Brasil. Percebe-se que a menor taxa é a de Santa Catarina (7,7%), enquanto a maior pertence ao Maranhão (19,9%).
+
+Os próximos gráficos são restritos ao município do Rio de Janeiro.
+
+As Figuras 2 e 3 apontam as mulheres como maioria entre a população desempregada. Além disso, mais da metade (quase 57%) são negros que, segundo o IBGE, resultam da soma de pardos e pretos.   
+
+Coincidentemente, quase 57% da população desempregada possui ensino médio completo ou superior incompleto, o que se justifica tanto pela dificuldade em conseguirem emprego em home office, ou por não se sentirem confortáveis em trabalharem no meio informal, como aponta a Figura 4.
+
+Nota-se que, segundo a Figura 5, 60% desses desempregados receberam o auxílio emergencial fornecido pelo governo federal, em contrapartida, 40% não foi contemplado com o benefício.
+
+  
+  </font>
+  </p>
+  
+**Figura 1: Taxa de desocupação por Estado no Brasil (%)** 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+mapa = geojson_read("data/br_states.geojson", what = "sp")
+
+desocup_mapa = readRDS(file = "data/desocup_mapa.rds")
+
+mapa@data = left_join(mapa@data, desocup_mapa, by= "codigo_ibg")
+
+bins = quantile(desocup_mapa$Taxa_desocup, seq(0, 1, 0.1428571))
+
+bins[8] = max(desocup_mapa$Taxa_desocup)+1
+
+pal <- colorBin("Greens", domain = desocup_mapa$Taxa_desocup, bins = bins)
+
+
+labelFormat_decimal <- function (prefix = "", suffix = "", between = " &ndash; ", digits = 3, 
+                                 big.mark = ",", transform = identity, decimal.mark = "."){
+  formatNum <- function(x) {
+    format(round(transform(x), digits), trim = TRUE, scientific = FALSE, 
+           big.mark = big.mark, decimal.mark = decimal.mark,nsmall=digits)
+  }
+  function(type, ...) {
+    switch(type, numeric = (function(cuts) {
+      paste0(prefix, formatNum(cuts), suffix)
+    })(...), bin = (function(cuts) {
+      n <- length(cuts)
+      paste0(prefix, formatNum(cuts[-n]), between, formatNum(cuts[-1]), 
+             suffix)
+    })(...), quantile = (function(cuts, p) {
+      n <- length(cuts)
+      p <- paste0(round(p * 100), "%")
+      cuts <- paste0(formatNum(cuts[-n]), between, formatNum(cuts[-1]))
+      paste0("<span title=\"", cuts, "\">", prefix, p[-n], 
+             between, p[-1], suffix, "</span>")
+    })(...), factor = (function(cuts) {
+      paste0(prefix, as.character(transform(cuts)), suffix)
+    })(...))
+  }
+}
+
+
+mapa = leaflet(mapa) %>%
+  addTiles("Taxa de desocupação (%)") %>%
+  addPolygons( fillColor = ~pal(Taxa_desocup), weight = 0.5,
+  opacity = 1,
+  color = "black",
+  dashArray = "2",
+  fillOpacity = 1,
+
+              label = ~paste0(nome, ": " ,formatC(Taxa_desocup, decimal.mark = ",")))%>%
+ addLegend(pal = pal, values = ~Taxa_desocup, opacity = 0.7, title = "Taxa de desocupação (%)", 
+    position = "bottomright", labFormat = labelFormat_decimal(suffix = "", decimal.mark=",",
+                                    digits = 1, big.mark = "."))
+
+mapa
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />  
+
+
+**Figura 2: Pessoas desempregadas de acordo com sexo (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+############### Sem emprego - Por sexo  ##################
+# Criando dataset para conferir pessoas em Home Office
+desemprego_sexo <- pnad_com_pesos %>%
+  group_by(Sexo) %>%
+  summarise(
+    sem_trabalho = survey_total(C015 == 1, na.rm = TRUE)) %>% 
+     mutate(sem_trabalho_ = (sem_trabalho/sum(sem_trabalho))*100) 
+
+
+# gráfico
+desemprego_sexo_ssa <- ggplot(desemprego_sexo, aes(fill = Sexo, y = sem_trabalho_, x = Sexo )) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+ggplotly(desemprego_sexo_ssa)
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+
+**Figura 3: Pessoas desempregadas de acordo com etnia (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+########################## Sem emprego - Cor #######################
+
+
+desemprego_cor <- pnad_com_pesos %>%
+  group_by(Cor) %>%
+  summarise(
+    sem_trabalho = survey_total(C015 == 1, na.rm = TRUE)) %>% drop_na %>% 
+  mutate(sem_trabalho_ = (sem_trabalho/sum(sem_trabalho))*100)
+desemprego_cor = desemprego_cor[-3,]
+
+
+
+# gráfico
+desemprego_cor_ssa <- ggplot(desemprego_cor, aes(fill = Cor, y = sem_trabalho_, x = Cor)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(desemprego_cor_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+**Figura 4: Pessoas desempregadas por escolaridade (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+################################ Sem Emprego - Escolaridade ###########################
+
+
+desemprego_escolaridade <- pnad_com_pesos %>% 
+  group_by(Escolaridade) %>%
+  summarise(
+    sem_trabalho = survey_total(C015 == 1, na.rm = TRUE)) %>% drop_na %>% 
+  mutate(sem_trabalho_ = (sem_trabalho/sum(sem_trabalho))*100)
+
+
+
+# gráfico
+desemprego_escolaridade_ssa <- ggplot(desemprego_escolaridade, aes(fill = Escolaridade, y = sem_trabalho_, x = Escolaridade)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(desemprego_escolaridade_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+**Figura 5: Pessoas desempregadas que receberam auxílio emergencial (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+###################################### Desemprego - Auxilio #####################
+
+
+
+desemprego_auxilio <- pnad_com_pesos %>% 
+  group_by(auxilio_emergencial) %>%
+  summarise(
+    sem_trabalho = survey_total(C015 == 1, na.rm = TRUE)) %>% drop_na %>% 
+  mutate(sem_trabalho_ = (sem_trabalho/sum(sem_trabalho))*100)
+
+
+
+# gráfico
+desemprego_auxilio_ssa <- ggplot(desemprego_auxilio, aes(fill = auxilio_emergencial, y = sem_trabalho_, x = auxilio_emergencial)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0","#5F9EA0")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(desemprego_auxilio_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+
+
+
+
+#### Fonte:
+
+
+- [Instituto Brasileiro de Geografia e Estatística (IBGE)](https://covid19.ibge.gov.br/pnad-covid/)
+ 
+- [Caixa Econômica Federal](https://www.caixa.gov.br/Paginas/home-caixa.aspx)
+ 
+- [Governo Federeal do Brasil](https://www.gov.br/pt-br)
