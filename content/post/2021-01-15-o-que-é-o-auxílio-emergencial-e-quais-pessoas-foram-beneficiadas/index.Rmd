@@ -1,0 +1,318 @@
+---
+title: O que é o auxílio emergencial e quais pessoas foram beneficiadas?
+author: Tais
+date: '2021-01-15'
+slug: []
+categories:
+  - Auxílio Emergencial
+  - Covid19
+tags:
+  - auxílio emergencial
+  - gráfico interativo
+---
+
+
+```{r, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(plotly)
+library(plyr)
+library(flexdashboard)
+library(tidyverse)
+library(dplyr)
+library(srvyr) 
+library(readr)
+library(ggplot2)
+library(Cairo)
+library(janitor)
+library(geojsonio)
+library(leaflet)
+library(readxl)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+pnad_com_pesos_mapa <- readRDS("data/pnad_com_pesos_mapa.rds")
+pnad_com_pesos <- readRDS("data/pnad_com_pesos.rds")
+
+```
+
+O Auxílio Emergencial é um benefício financeiro concedido pelo Governo Federal destinado aos trabalhadores informais, microempreendedores individuais, autônomos e desempregados, e tem por objetivo fornecer proteção emergencial no período de enfrentamento à crise causada pela pandemia da Covid-19.
+
+Algumas exigências são feitas para que o indivíduo tenha o direito de receber o auxílio emergencial, sendo estas: <br> (i) Esteja desempregado ou exerça atividade na condição de: Microempreendedores individuais; contribuinte individual da Previdência Social; trabalhador Informal. <br> (ii) Pertença à família cuja renda mensal por pessoa não ultrapasse meio salário mínimo  (RS 522,50), ou cuja renda familiar total seja de até 3 (três) salários mínimos (R$ 3.135,00).
+
+Tal benefício contempla cerca de 60% da população brasileira e, das pessoas que usufruem do auxílio emergencial, pelo menos 75% estão localizados nas regiões Norte e Nordeste, segundo o Governo Federal do Brasil. 
+
+A Figura 1 é referente à taxa de beneficiados com auxílio emergenciais nos estados do Brasil. Calculada como a razão entre a estimativa do número de pessoas que receberam o auxílio em determinada região pelo número de habitantes desta mesma localidade. 
+
+No mapa, as cores mais escuras evidenciam as maiores taxas, que estão concentradas nas regiões Norte e Nordeste, com destaque aos estados do Pará (59,2%), Amapá (72,2%) e Pará (68,38%). Por outro lado, as cores mais claras estão associadas às menores porcentagens, sendo estas pertencentes ao Distrito Federal (34,95%), Rio Grande do Sul (33,93%) e Santa Catarina (27,02%).
+
+As outras análises serão restritas ao município do Rio de Janeiro, com o objetivo de compreender melhor o perfil das pessoas que utilizam o benefício na região.
+
+<font size="3.75">**Figura 1: Mapa da taxa de pessoas que receberam auxílio emergencial nos Estados brasileiros. (%)**</font>
+  
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+auxilio_mapa<- pnad_com_pesos_mapa %>%
+  group_by( UF) %>%
+  summarise(
+    auxilio = survey_total(D0051 == 1, na.rm = TRUE),
+    total = survey_total(one, na.rm = TRUE)
+  )
+
+auxilio_mapa$pessoas_auxilio = (auxilio_mapa$auxilio/auxilio_mapa$total)*100
+auxilio_mapa$pessoas_auxilio = round(auxilio_mapa$pessoas_auxilio, 1)
+
+colnames(auxilio_mapa)[1]= "codigo_ibg"
+
+mapa = geojson_read("data/br_states.geojson", what = "sp")
+
+auxilio_mapa= as.data.frame(auxilio_mapa)
+auxilio_mapa$codigo_ibg= as.character(auxilio_mapa$codigo_ibg)
+
+mapa@data = left_join(mapa@data, auxilio_mapa, by= "codigo_ibg")
+
+bins = quantile(auxilio_mapa$pessoas_auxilio, seq(0, 1, 0.1428571))
+
+bins[8] = max(auxilio_mapa$pessoas_auxilio)+1
+
+pal <- colorBin("YlOrRd", domain = auxilio_mapa$pessoas_auxilio, bins = bins)
+
+
+labelFormat_decimal <- function (prefix = "", suffix = "", between = " &ndash; ", digits = 3, 
+                                 big.mark = ",", transform = identity, decimal.mark = "."){
+  formatNum <- function(x) {
+    format(round(transform(x), digits), trim = TRUE, scientific = FALSE, 
+           big.mark = big.mark, decimal.mark = decimal.mark,nsmall=digits)
+  }
+  function(type, ...) {
+    switch(type, numeric = (function(cuts) {
+      paste0(prefix, formatNum(cuts), suffix)
+    })(...), bin = (function(cuts) {
+      n <- length(cuts)
+      paste0(prefix, formatNum(cuts[-n]), between, formatNum(cuts[-1]), 
+             suffix)
+    })(...), quantile = (function(cuts, p) {
+      n <- length(cuts)
+      p <- paste0(round(p * 100), "%")
+      cuts <- paste0(formatNum(cuts[-n]), between, formatNum(cuts[-1]))
+      paste0("<span title=\"", cuts, "\">", prefix, p[-n], 
+             between, p[-1], suffix, "</span>")
+    })(...), factor = (function(cuts) {
+      paste0(prefix, as.character(transform(cuts)), suffix)
+    })(...))
+  }
+}
+
+
+mapa = leaflet(mapa) %>%
+  addTiles("Taxa de beneficiados pelo auxílio emergencial (%)") %>%
+  addPolygons( fillColor = ~pal(pessoas_auxilio), weight = 0.5,
+  opacity = 1,
+  color = "black",
+  dashArray = "2",
+  fillOpacity = 1,
+
+              label = ~paste0(nome, ": " ,formatC(pessoas_auxilio, decimal.mark = ",")))%>%
+ addLegend(pal = pal, values = ~pessoas_auxilio, opacity = 0.7, title = "Taxa de beneficiados pelo auxílio emergencial (%)", 
+    position = "bottomright", labFormat = labelFormat_decimal(suffix = "", decimal.mark=",",
+                                    digits = 1, big.mark = "."))
+
+mapa
+
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />  
+  
+
+De acordo com as Figuras 2 e 3, 53% das pessoas que receberam o auxílio eram mulheres. Pessoas pardas também foram maioria (47,5%), seguida por pessoas brancas (39,3%) e pretas (12,7%). Indígenas e amarelas compõem menos de 1% da parcela da população que recebeu o benefício.
+
+
+**Figura 2: Pessoas que receberam auxílio emergencial por sexo (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#################### Auxilio - Sexo  #######################
+auxilio_sexo <- pnad_com_pesos %>%
+  group_by( Sexo) %>%
+  summarise(
+    auxilio = survey_total(D0051 == 1, na.rm = TRUE),
+    total = survey_total(one, na.rm = TRUE)
+  ) %>%
+  mutate(pessoas_auxilio = (auxilio/sum(auxilio))*100) %>%
+  drop_na()
+
+# gráfico
+auxilio_sexo_ssa <- ggplot(auxilio_sexo, aes(fill = Sexo, y = pessoas_auxilio, x = Sexo)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#FDCDAC","#FDCDAC")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(auxilio_sexo_ssa)
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+**Figura 3: Pessoas que receberam auxílio emergencial por etnia (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#################### Auxilio - Cor #######################
+auxilio_cor <- pnad_com_pesos %>%
+  group_by(Cor) %>%
+  summarise(
+    auxilio = survey_total(D0051 == 1, na.rm = TRUE),
+    total = survey_total(one, na.rm = TRUE)
+  ) 
+#auxilio_cor = auxilio_cor[-4,-c(6:7)]
+auxilio_cor$pessoas_auxilio = (auxilio_cor$auxilio/sum(auxilio_cor$auxilio))*100
+  
+# gráfico
+auxilio_cor_ssa <- ggplot(auxilio_cor, aes(fill = Cor, y = pessoas_auxilio, x = Cor)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")
+
+ggplotly(auxilio_cor_ssa)
+
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+
+Ao analisar a Figura 4, observa-se que 58,98% das pessoas que foram contempladas com o benefício vivem com a renda entre um e dois salários mínimos, sendo esta a maior parcela. Pessoas que receberam o auxílio e vivem com menos de um salário correspondem a 13,93%, com pouca diferença para pessoas que recebem entre dois e três salários, sendo este correspondente a 9,61%. Porém, pouco mais de 12% das pessoas que receberam o auxílio no mês de outubro tinham rendimento acima de três salários mínimos. Sendo assim, não se enquadravam na exigência citada anteriormente e, portanto, receberam este benefício de maneira inapropriada.
+
+
+**Figura 4: Pessoas que receberam auxílio emergencial por faixa salarial em salário mínimo (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+##################### Auxilio - Faixa Salarial ####################
+auxilio_renda <- pnad_com_pesos %>%
+  group_by(Faixa_salario) %>%
+  summarise(
+    auxilio = survey_total(D0051 == 1, na.rm = TRUE),
+    total = survey_total(one, na.rm = TRUE))
+auxilio_renda = auxilio_renda[-7,]
+auxilio_renda$pessoas_auxilio = (auxilio_renda$auxilio/sum(auxilio_renda$auxilio))*100
+ 
+# gráfico
+auxilio_renda_ssa <- ggplot(auxilio_renda, aes(fill = Faixa_salario, y = pessoas_auxilio, x = Faixa_salario)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  
+  theme_classic() +
+  coord_flip() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC")) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(auxilio_renda_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+<br />
+
+Ao avaliar a Figura 5, verifica-se que 63,49% possui domicílio próprio já pago, seguido por domicílio alugado (20,33%) e cedido (115,41%). Uma pequena parcela de pessoas (4,12%) estão quitando sua residência própria.
+
+
+**Figura 5: Pessoas que receberm auxílio emergencial por tipo de domicílio (%)**
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+################ Auxilio - Por tipo do domicilio ###################
+auxilio_domicilio <- pnad_com_pesos %>%
+  group_by(domicilio_situacao) %>%
+  summarise(
+    auxilio = survey_total(D0051 == 1, na.rm = TRUE),
+    total = survey_total(one, na.rm = TRUE)) 
+auxilio_domicilio = auxilio_domicilio[-5,]
+auxilio_domicilio$pessoas_auxilio  = (auxilio_domicilio$auxilio/sum(auxilio_domicilio$auxilio))*100
+ 
+# ordenando eixo X
+legenda_domicilio <- c("Próprio (já pago)",
+                       "Próprio (ainda pagando)",
+                       "Alugado", 
+                       "Cedido (Por empregador,\n Familiar ou outro)")
+# gráfico
+auxilio_domicilio_ssa <- ggplot(auxilio_domicilio, aes(fill = domicilio_situacao, y = pessoas_auxilio, x = domicilio_situacao)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_classic() +
+  theme(axis.title.x = element_text(colour = "black"),
+        axis.title.y = element_text(colour = "black"),
+        axis.text.y = element_text(face="bold", color="#000000", 
+                                   size=10),
+        axis.line = element_line(colour = "black", 
+                                 size = 1, linetype = "solid"),
+        axis.text=element_text(size=6, face="bold"),
+        axis.text.x = element_text(face="bold", color="#000000", size=10),
+        plot.title = element_text(colour = "black", size = 17, hjust=0.5),
+        legend.position = "none") +
+  labs(x = "", y ="Percentual (%)",caption = "Fonte: Microdados da Pnad Covid19 - IBGE. Junho 2020.",
+       title = "") +
+  scale_fill_manual(values = c("#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC","#FDCDAC")) +
+  scale_x_discrete(labels = legenda_domicilio) +
+  scale_y_discrete(limits=factor(0:100), breaks = c(0,10,20,30,40,50,60,70,80,90,100), name = "Percentual (%)")+  coord_flip()
+
+ggplotly(auxilio_domicilio_ssa)
+
+```
+<font size="2.75"> *Fonte dos dados: Instituto Brasileiro de Geografia e Estatística.*</font> 
+<br  />
+
+
+Depois de verificar estes gráficos, é possível ter uma percepção geral sobre as pessoas que se receberam o auxílio emergencial no munícipio do Rio de Janeiro, sendo estas, pessoas pardas, com renda entre um e dois salários mínimos e que já possuem domicílio próprio quitado.
+
+  </font>
+  </p>
+  
+
+  <br />
+
+#### Fonte:
+
+
+- [Instituto Brasileiro de Geografia e Estatística (IBGE)](https://covid19.ibge.gov.br/pnad-covid/)
+ 
+- [Caixa Econômica Federal](https://www.caixa.gov.br/Paginas/home-caixa.aspx)
+ 
+- [Governo Federeal do Brasil](https://www.gov.br/pt-br)
