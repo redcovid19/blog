@@ -1,0 +1,88 @@
+---
+title: 'Sou eu o responsável por meu irmão?": ou o porquê de vacinar.'
+author: Fausto
+date: '2021-01-18'
+slug: []
+categories:
+  - Covid19
+  - Vacina
+tags:
+  - vacina
+  - corona vírus
+  - história
+---
+
+## 1. O Escudo
+
+**Babilônia, 326 AEC**. Alexandre Magno tinha aos seus pés um dos maiores Impérios da História, indo da península dos Balcãs ao vale do Rio Indo. Seu sucesso nas conquistas se deve a muitos fatores, e dentre estes fatores está a **falange**. A falange é a histórica formação de combate utilizada pelos helênicos desde 800 AEC, na qual os soldados se posicionam lado-a-lado em fileiras cerradas formando blocos. O armamento de cada soldado dependia da função de cada bloco. No caso do exército de Alexandre, uma das divisões mais famosas e lendárias eram os *Argiráspidas*, ou os Escudos Prateados.
+
+Cada um dos Escudos Prateados carregava na mão direita uma lança (*dory*) e na mão esquerda um escudo (*áspis*). O mais interessante da formação é que embora o soldado devesse ameaçar o oponente que estivesse na sua frente, o seu papel principal era proteger com o seu escudo o soldado à sua esquerda e dar fintas e ataques de oportunidade nos oponentes na sua diagonal. Como consequência de proteger a pessoa à esquerda, um dos pontos fracos da falange está no fato do soldado mais à direita da falange não estar protegido. A imagem abaixo de um antigo vaso[1] mostra um combate entre falanges e a vulnerabilidade do flanco direito.
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='vaso' src='https://i.imgur.com/N3Qhllj.jpg' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+
+Pera, mas por que estamos vendo um vaso com mais de 2600 anos e falando de soldados de Alexandre, o Grande? O que isso tem a ver com vacinas?
+
+Vamos começar dizendo o óbvio: um soldado de uma falange tinha que confiar que o soldado à direita iria protegê-lo de modo que se sentisse seguro para proteger o soldado à sua esquerda, e o soldado do flanco direito tinha que ser o mais experiente e corajoso para manter a calma e proteger o soldado à sua esquerda até a última consequência. Se cada um não fizesse o seu papel, se algum dos soldados se acovardasse ou não confiasse no seu vizinho, então a formação quebrava e todos ficavam vulneráveis ao ataque inimigo. Tal qual uma corrente, a falange é tão forte quanto o elo mais fraco.
+
+A mesma coisa é verdade quando estamos falando de vacinação. O ato de se vacinar é como um escudo que carregamos, no entanto ele funciona melhor para proteger quem está ao nosso lado e não a nós mesmos. Se não notarmos isso e não fizermos a nossa parte, a estratégia falha e **todos** ficamos mais vulneráveis. Assim, a política pública de vacinação é análoga à falange.
+
+Entretanto, muitas pessoas se perguntam sobre a necessidade de uma política pública de vacinação. Ainda mais quando o assunto é vacinação obrigatória, é usual vermos argumentos sobre liberdade de escolha ou sobre o medo da vacina causar algum mal. Afinal, se estamos dizendo que a vacinação é análoga a uma formação de guerra, então é porque há riscos e há consequências, certo?
+
+## 2. Os Adversários
+
+**Rio de Janeiro, 1904 EC**. O presidente Rodrigues Alves enfrentava uma série de epidemias ao longo do território nacional desde o começo do seu mandato. A capital do Brasil era o 3ᵒ maior porto do continente. No entanto, a cidade também era mundialmente conhecida como o *túmulo insaciável do estrangeiro* devido às recorrentes epidemias de **peste bubônica**, **febre amarela** e **varíola**. A situação sanitária se colocava como um entrave à modernização e ao desenvolvimento das forças produtivas do país.
+
+Dentre as principais doenças que assolavam o povo brasileiro, a varíola era a mais temida e com razão. Estima-se que só no século XX a varíola matou aproximadamente 300 milhões de pessoas no mundo. Felizmente, a varíola se tornaria a primeira doença erradicada globalmente em 1980, após sucessivos esforços globais de vacinação coordenados pelas Nações Unidas. Entretanto, isso era um futuro ainda distante para Rodrigues Alves. 
+
+O presidente queria uma modernização urbana da capital como a ocorrida em Paris ou em Buenos Aires, de modo a tornar o Rio de Janeiro em uma vitrine do país e servir de modelo para a organização urbana de outras cidades da República. Para isso apontou Pereira Passos como prefeito e Oswaldo Cruz como chefe da Diretoria Geral de Saúde Pública (**DGSP**). As missões de ambos estavam intimamente conectadas e as escolhas políticas do *como* fazer a modernização urbana acabariam por impactar a capacidade de combate às doenças.
+
+O projeto de Pereira Passos para a modernização ficou conhecido como o **Bota-Abaixo**, pela agressividade do processo de remoção dos cortiços e demolição de prédios. Apesar de ter sido um marco importante para o saneamento e formação da imagem da cidade, o Bota-Abaixo também gerou uma massa de cidadãos revoltados que se viram expulsos de suas casas e construíndo suas novas habitações nas encostas dos morros cariocas. A reurbanização para eliminar os cortiços produziu as favelas, e lá os problemas sanitários se perpetuaram.
+
+É neste contexto que as intervenções sanitárias de Oswaldo Cruz ocorrem e vão além da vacina. Foram três grandes campanhas, a primeira contra a febre amarela, a segunda contra a peste bubônica e a terceira contra a varíola. Somente as duas últimas tinham como estratégia de combate a vacinação e ambas começaram em 1904. Em 1903, o foco de Oswaldo Cruz foi a febre amarela.
+
+Como a febre amarela é transmitida por mosquitos e não havia vacina à época, então determinou-se a criação de brigadas sanitárias para buscar e eliminar focos de reprodução dos mosquitos, incluindo o poder de entrarem em qualquer residência, independente da anuência do proprietário, e realizar a desinfecção do local. Além disso, locais considerados insalubres poderiam ser obrigados a serem reformados ou demolidos. Essa opção de combate se mostrou acertada do ponto de vista sanitário, no entanto rapidamente a população mais afetada pela brutalidade do Bota-Abaixo associou as práticas da política de saúde pública com as práticas políticas do projeto de reurbanização. Como consequência, em 1907 já não havia mais epidemia de febre amarela na capital do Brasil.
+
+No caso da peste bubônica, a transmissão se dá por picada de pulgas que tivessem parasitado um rato contaminado. Havia vacina para a doença à época, diferente da febre amarela, e essa vacina era bem conhecida e aceita na população, diferente da varíola. Além de campanhas de vacinação e isolamento compulsório de pessoas contaminadas, Oswaldo Cruz também aplicou a partir do começo de 1904 um plano de eliminação de ratos semelhante ao usado no caso da febre amarela, incluindo a obrigatoriedade de reforma sob pena de demolição. A eliminação do ratos não se deu somente por meio de funcionários da DGSP, como também pagando uma recompensa a quem levasse ao governo a carcaça de um rato. Apesar de alguns equívocos e de ter brevemente criado um mercado de carcaças de ratos, o combate caminhava para ser um sucesso. No ano anterior, o Rio de Janeiro apresentava 48,74 mortes por 100 mil habitantes em decorrência da peste bubônica, no entanto em 1909 o índice chegaria a 1,73 mortes por 100 mil habitantes.
+
+No entanto, o grande adversário era a varíola. A transmissão da varíola se dá de pessoa para pessoa, então ao contrário das duas outras doenças anteriores em que se podia atacar os vetores de transmissão (mosquito e ratos), a única maneira de combatê-la era por meio da vacinação em massa. Atento a este fato, Oswaldo Cruz pediu a aprovação no Congresso de um projeto de lei que tornava a vacinação contra a varíola obrigatória: um cidadão que não tomasse a vacina não poderia se matricular em uma instituição de ensino, ingressar no serviço público, se casar, viajar para fora do país, votar e outras restrições. Rapidamente, alguns setores da sociedade se mobilizaram contra a vacina e contra o governo, criando e difundindo campanhas de desinformação contra a vacinação, explorando os medos e a raiva de uma população que se via reiteradamente como alvo da violência empregada pelas políticas de modernização. Em 31 de outubro de 1904 a lei é aprovada e 10 dias depois começou a **Revolta da Vacina**.
+
+Inicialmente, vários setores descontentes protestaram contra a medida e apresentaram uma crescente resistência às ações do DGSP e do governo em geral. Acostumados com a truculência, a reação do governo foi de buscar o confronto gerando uma escalada de violência. Oportunisticamente, as forças políticas contrárias ao governo tentavam ganhar alguns dos setores descontentes e se legitimar como uma liderança deste que era essencialmente um movimento espontâneo. O tenente-coronel Lauro Sodré combateu ardentemente a lei no Senado e agora tentava reverter a derrota política inflamando e buscando cooptar os movimentos das ruas. Todavia, não era a única via de combate político que estava em seus planos.
+
+Como consequência da escalada de violência nas ruas, o desfile militar da Proclamação da República foi cancelado. Isso seria um detalhe esquecido e indigno de estar escrito na história do país se não fosse o fato de ter levado a uma enorme reviravolta política. Isto porque era neste dia 15 de novembro que os militares liderados pelo general Silvestre Travassos combinaram de cumprir o papel histórico do Exército no Brasil. Durante o desfile, fora combinado que o Silvestre Travassos incitaria as tropas à rebelião, sendo a data marcada entre conspiradores militares para dar um golpe de Estado no governo de Rodrigues Alves.
+
+Com o desfile cancelado, Lauro Sodré e outros conspiradores militares decidiram improvisar e se reuniram no Clube Militar no dia 14 e de lá tentaram incitar a traição dos demais militares. A Escola Militar da Praia Vermelha e outros focos dentro e fora da capital se levantaram contra o governo e disputas internas percorreram o país ao longo da noite. Rodrigues Alves se recusou a recuar e o ímpeto dos militares se esvaiu de um dia para o outro. Era um blefe. No dia 16 é declarado o estado de sítio e a vacinação obrigatória é suspensa, com isso as forças sediciosas vão se rendendo e o país volta à trágica normalidade.
+
+Para além das disputas de poder tão alheias à população geral, o que restou foi a desconfiança. Ao contrário das demais doenças das campanhas anteriores, a varíola demorou décadas para ser controlada. O impacto da desconfiança foi tamanho que as taxas de vacinação diminuíram nos anos seguintes, o que levou a uma das piores epidemias em 1908. Quase 30% de todos os óbitos na cidade foram decorrentes da varíola. O gráfico[2] abaixo da incidência da mortalidade por varíola na zona urbana do Rio de Janeiro entre os anos 1880 e 1910 da época mostra a dimensão da varíola.
+
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='FebreAmarela' src='https://i.imgur.com/OMMI859.jpg' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+
+A varíola venceu por décadas. A vacina já existia e funcionava, apesar de muitos terem levantado às vezes até dúvidas razoáveis quanto a sua eficiência. No entanto, a ausência de confiança e de diálogo político, o contexto político violento do Bota-Abaixo e a desinformação nociva e golpista por parte de certos setores sociais impediram que a política pública de vacinação funcionasse. Como a falange, ela desmanchou quando alguns mostraram falta de unidade ou pensaram em seus benefícios próprios ao semear a desconfiança, e acabamos todos mais vulneráveis por isso. O preço da traição e do egoísmo foi alto.
+
+Por mais que a vacina funcionasse e muitos a tomassem de modo individual, a ausência de adoção por parte de todos os potenciais vacinados causou inúmeras mortes de pessoas que não podiam se vacinar, como recém-nascidos e idosos. Pense no que isso significa: por mais que você tomasse, poderia perder o filho ou avô, porque o contágio destas pessoas viria de outra forma. O seu escudo ao proteger a si mesmo, acabou protegendo menos e falhando com as pessoas que ama. O que resta é esperar que a lição tenha sido aprendida e que no futuro não ocorra novamente.
+
+## 3. "*...vossos braços são muralhas do Brasil*"?
+
+**Rio de Janeiro, 2020 EC**. E hoje estamos novamente em uma situação onde uma política traiçoeira e mesquinha se coloca em meio a um debate que deveria ser de saúde pública. Surgiu uma novo adversário e temos boas razões para considerar que a Covid-19 é até menos terrível que a varíola. Apesar disso, talvez seja até mais difícil de vencer esse novo adversário, pois estamos hoje em um país ainda mais fraturado por políticas de ódio e divisão. Reciclam-se os argumentos de 1904: viola a liberdade de escolha, faz mal, não é eficiente, pode te deixar doente... Lauro Sodré, por exemplo, usou a de violar a liberdade de escolha como justificativa para a sua tentativa de golpe de Estado. Reciclam-se até os golpismos.
+
+Alexandre Magno não era um Silvestre Travassos. Quando forma-se a falange, os soldados mais próximos em geral são familiares ou pessoas com as quais se tem algum afeto. Obviamente, ninguém tem a certeza que vencerá o adversário. Porém há a certeza de que se não formarem a falange, então estarão ainda mais vulneráveis. Logo, é a melhor aposta, e não só individualmente, como pensando justamente nos seus familiares e amigos mais próximos. Mantemos o mesmo pensamento para a vacinação.
+
+A vacinação é a melhor opção para que as pessoas que você ama estejam mais seguras.
+
+Isto porque Alexandre Magno, discípulo de Aristóteles, sabia perfeitamente qual é a resposta para a indagação de Caim: "*Sou eu o responsável por meu irmão?*"
+
+Sim! E por isso é seu dever vacinar. Seja o escudo de quem você ama.
+
+### Fonte:
+
+[1]: *Museo Nazionale Etrusco*. Vaso Chigi. Ver mais [aqui](https://brown.edu/Departments/Joukowsky_Institute/courses/greekpast/4806.html).
+
+[2]: Fiocruz. Reprodução de gráfico da incidência da mortalidade por varíola na zona urbana do Rio de Janeiro entre os anos 1880 e 1910. Disponível no [acervo digital](http://arch.coc.fiocruz.br/index.php/reproducao-de-grafico-da-incidencia-da-mortalidade-por-variola-na-zona-urbana-do-rio-de-janeiro-entre-os-anos-1880-e-1910).
