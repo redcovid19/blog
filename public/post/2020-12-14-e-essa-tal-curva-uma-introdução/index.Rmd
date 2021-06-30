@@ -1,0 +1,119 @@
+---
+title: '"E essa tal curva?": Uma introdução'
+author: Fausto Marques
+date: '2020-12-14'
+slug: []
+categories:
+  - Covid19
+tags:
+  - curva
+  - função
+  - achatar a curva
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Na matemática, uma **curva** é uma maneira de enxergar relações entre duas coisas. A relação é habitualmente chamada de **função** e, por mais difícil que seja, sempre pode ser entendida como uma caixa que chamamos de $f$. Nesta caixa há dois buracos, um de *entrada* e um de *saída*, com formatos tais que somente algumas coisas podem entrar ou sair. Chamamos uma coisa qualquer destas que podem entrar de $x$, e chamamos a coisa associada que sair de $y$ ou de $f(x)$.
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Função' src='https://i.imgur.com/HheYxg7.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+Calma. Nós sabemos que isso de $x$, $y$ e misturar letras e números não traz lembranças boas para muitas pessoas. No entanto, por incrível que pareça, essas letras existem para mostrar um dos poderes da matemática: qualquer coisa pode ser um $x$ ou o $y$ de alguma função $f$. Então vamos pensar diferente. Vamos mostrar uma função com a qual muitos de nós estão acostumados:
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Blackbox' src='https://i.imgur.com/2t1dlnX.jpg' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+Neste caso, a nossa função $f$ é literalmente uma caixa. O que pode ser um $x$ desta função? Bem, não sabemos como essa caixa funciona por dentro, mas sabemos que se empurrarmos a última alavanca, sairá Coca-Cola do buraco logo acima. Então $x$ é a alavanca que alguém empurra e $y$ é o refrigerante, de modo que podemos dizer que *o resultado de empurrar a última alavanca da caixa $f$ é Coca-cola*, ou seja
+	
+$\color{green}{f}({\color{blue}{última alavanca}}) = {\color{orange}{Coca-Cola}}.$
+	
+Certo. E onde entra a curva?
+	
+A curva faz sentido quando o que entra e sai da caixa $f$ são números. Vamos imaginar que somente o que interessa é um único bico da máquina de refrigerante, que envolve uma das alavancas e um dos refrigerantes. Para essa parte de interesse, nós notamos que a quantidade de refrigerante que sai de um bico da máquina tem relação com o tempo em que mantemos a alavanca pressionada. Logo, podemos estabelecer que $x$ é o tempo em que pressionamos a alavanca e $y$ é a quantidade de refrigerante que sai do bico em um instante de tempo. Para facilitar, diremos que essa quantidade de refrigerante em um instante de tempo é o *fluxo* do bico. Além disso, como não queremos trabalhar com segundos, minutos, litros e unidades de medida do tipo, vamos dizer que o tempo está em uma *unidade de tempo* e a quantidade de refrigerante está em uma *unidade de refrigerante*.
+
+Na Figura 3 abaixo temos $4$ casos do que ocorre quando pressionamos a alavanca: no $\color{blue}{primeiro}$, o bico tem um fluxo fixo de $1$ unidade de refrigerante por unidade de tempo; no $\color{red}{segundo}$, o bico tem um fluxo que cresce $x$ unidades de refrigerante por unidade de tempo; e no $\color{purple}{terceiro}$, o bico também tem fluxo crescente de $\sqrt{x}$ unidades de refrigerante por unidade de tempo; e no $\color{orange}{quarto}$, o bico tem um fluxo que cresce $x^2$ unidades de refrigerante por unidade de tempo. Não precisa focar no número. Vamos nos guiar visualmente.
+
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Retas' src='https://i.imgur.com/CaO82Y2.gif' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+
+Perceba que no caso do $\color{blue}{primeiro}$ bico, o fluxo é constante, ou seja, a máquina sempre mantém a quantidade de refrigerante que está saindo do bico em cada instante independente do quanto de tempo que você está pressionando a alavanca.
+
+Neste e no $\color{red}{segundo}$ bico acima temos os casos mais simples, no qual as nossas curvas são *retas*. Não há problema algum nisso, por mais que pareça estranho! Uma curva pode ser reta e é comum entendermos curvas a partir de retas que sejam bem próximas de cada um dos seus trechos que não são retos. Na Figura 3 acima até colocamos uma linha tracejada que mostra as retas mais próxima às curvas $\color{purple}{terceiro}$ e $\color{orange}{quarto}$ bicos em cada tempo $x$.
+
+Em especial, a **inclinação** da reta é uma das informações mais valiosas que temos, e, pela figura que vimos, já percebemos que a inclinação da curva do $\color{blue}{primeiro}$ bico é *menor* que a inclinação da curva do $\color{red}{segundo}$ bico entre quaisquer unidades de tempo.
+
+A importância da inclinação é que ela nos diz o quanto algo está mudando. No $\color{blue}{primeiro}$ bico a inclinação é $0$, e vimos que o fluxo é constante. Já no caso do $\color{red}{segundo}$ bico, temos que a inclinação é de $1$. Sabemos disso porque vimos, por exemplo, que no $\color{red}{segundo}$ bico temos um fluxo de $x$ unidades de refrigerante por $x$ unidades de tempo. Isso pode ser lido como: não importa a quanto tempo estamos pressionando a alavanca, se aumentarmos em $1$ esse tempo $x$ que estamos pressionando, também aumentamos em $1$ o fluxo de refrigerante $y$. Perceba: nesses dois casos a inclinação não depende do valor de $x$, ela é sempre a mesma.
+
+Quando a curva é uma reta, é fácil ver isso...
+
+...mas e quando não for uma reta como no $\color{purple}{terceiro}$ e $\color{orange}{quarto}$ bicos? Aí já vimos que a reta e sua inclinação dependem do tempo $x$. Sabe aquelas retas tracejadas que colocamos acima? Então, sabemos o quão rápido algo está mudando pela inclinação dessas retas tracejadas, e podemos perceber que o $\color{purple}{terceiro}$ bico vai ficando *menos* inclinado enquanto que o $\color{orange}{quarto}$ bico vai ficando *mais* inclinado.
+
+E isso tem tudo a ver com essa tal coisa de **achatar a curva** que escutamos por aí.
+
+Pense assim: a *população suscetível* do seu país é o *refrigerante* que tem dentro da máquina, a *epidemia* é alguém apertando a alavanca de algum dos *bicos* e a capacidade do *sistema de saúde* de cuidar das pessoas doentes são os *copos* disponíveis.
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Copo' src='https://i.imgur.com/o7x5BmE.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+
+Estamos fazendo uma simplificação, claro. Nesta simplificação, o perigo termina quando $100\%$ da população não está mais suscetível e tem alguma imunidade contra o vírus. Ou seja, no final, independente de qual seja o bico utilizado, todo o refrigerante deve ter saído da máquina.
+
+Infelizmente, nenhum dos copos é grandes o suficiente para conter todo o refrigerante sozinho. Além disso, qualquer refrigerante derramado são vidas perdidas em decorrência de falta de tratamento médico. Tudo o que podemos fazer é trocar de copo! Só que nesse tempo em que estamos trocando o copo, alguma quantidade de refrigerante será desperdiçada porque a alavanca só parará de ser pressionada quando acabar o conteúdo da máquina.
+
+Vejamos dois últimos exemplos de curvas que se parecem mais com uma epidemia do que as curvas apresentadas na Figura 3. Ao lado de cada uma das curvas temos dois "copos" mostrando quantos porcento da população total obtemos com o valor de $x$ no trecho que está sendo desenhado.
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Enchendo' src='https://i.imgur.com/zBP7wxV.gif' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<br>
+
+Podemos ver que a curva $\color{orange}{laranja}$ enche mais rápido o copo. Se colocássemos uma reta para nos auxiliar a ver o fluxo de tinta, teríamos que a reta começaria com uma inclinação bem alta, bem mais inclinada que qualquer ponto até o cume quando comparada com a curva $\color{purple}{roxa}$. Isso significa que no começo muitas pessoas são contaminadas e o vírus se espalha rapidamente.
+
+Por outro lado, a curva $\color{purple}{roxa}$ é mais controlada no quanto enche o copo. A inclinação no começo é bem menor que a da curva $\color{orange}{laranja}$, de modo que o cume ocorre posteriormente. Ou seja, no começo poucas pessoas são contaminadas e o contágio vai subindo lentamente até atingir metade da população e depois começa a decrescer.
+
+Como o crescimento do fluxo é menor na curva $\color{purple}{roxa}$, vemos que ela é mais achatada que a curva $\color{orange}{laranja}$. Achatar a curva é diminuir o quão rápida é a mudança do fluxo, é ter mais controle no como enchemos o copo para evitar que acabe derramando o refrigerante. Em outras palavras: é adotar distanciamento social e outras medidas mais duras de combate às doenças infecciosas.
+
+Bom, agora você deve estar se perguntando: se todo mundo vai ser contaminado, então qual a diferença? E se todo mundo tem que ser infectado, não é melhor que isso ocorra o mais rápido possível para tudo voltar ao normal?
+
+A resposta é justamente o porquê de termos que achatar a curva! Veja, se muita gente fica doente ao mesmo tempo, os serviços de saúde (públicos ou privados) podem não conseguir dar conta do número de pessoas precisando de cuidado médico. Os serviços de saúde são o nosso copo, lembra? Um fluxo muito grande de doentes diminui a capacidade de tratar e tratar bem todas as pessoas. Logo, mais pessoas acabam morrendo, não só pelo vírus, como também por falta de recursos ou por não conseguirem acesso ao serviço médico. Além disso, os profissionais de saúde (médicos, enfermeiros, técnicos de enfermagem, agentes de saúde) também acabam sendo infectados pelo vírus. Se o fluxo de contágio é alto, então muitos profissionais de saúde são afetados ao mesmo tempo, e isso diminui ainda mais a capacidade do serviço de saúde. O nosso copo diminui justamente quando o fluxo está maior.
+
+Por isso a curva $\color{purple}{roxa}$ é mais desejável que a curva $\color{orange}{laranja}$ nesse caso da epidemia.
+
+É como na máquina de refrigerante mesmo. Definitivamente não é uma maneira muito boa você só virar uma garrafa de 2 litros cheia para encher um copinho! Vai acabar derramando o refrigerante. O que não parece muito sério quando estamos falando de refrigerante, no entanto é bem sério quando ao invés de refrigerante temos vidas. E aí? Sabendo disso, está pronto para ajudar a achatar a curva?

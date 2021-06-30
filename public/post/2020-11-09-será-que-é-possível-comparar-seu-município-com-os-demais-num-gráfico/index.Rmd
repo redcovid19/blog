@@ -1,0 +1,211 @@
+---
+title: Será que é possível comparar seu município com os demais num gráfico?
+author: Rafael Cabral Fernandez
+date: '2020-11-09'
+slug: []
+categories:
+  - Covid19
+  - Rio de Janeiro
+tags:
+  - número de casos
+  - óbitos
+  - mesorregião
+  - gráfico interativo
+---
+
+
+```{r, warning = F, message= F, echo = F}
+knitr::opts_chunk$set(warning = F, message = F, echo = F)
+library("kableExtra")
+library("stringr")
+library("lubridate")
+library("DT")
+library("dplyr")
+library("ggplot2")
+library("plotly")
+library("ggthemes")
+library("tidyverse")
+
+load("data/data_post_semana3.RData")
+
+
+```
+
+
+<style>
+body{text-align: justify;}
+</style>
+
+**Por Rafael Cabral Fernandez**
+
+Imagine que seja de interesse analisar no mesmo gráfico o número de casos ou óbitos acumulados em todos os municípios do Rio de Janeiro. Do ponto de vista visual, isso seria razoável?
+
+Observe pelo gráfico a seguir que representar 92 municípios é o mesmo que traçar 92 linhas, uma para cada. Esta quantidade de traços pode causar uma certa poluição visual. As linhas se confundem a um ponto de não permitirem interpretações coerentes. O que é possível de retirar como informação são comportamentos destoantes, como no caso do município de Varre-Sai, que apresenta a maior concentração de casos confirmados por 100 mil habitantes. Contudo, o município de Varre-Sai tem uma quantidade populacional total muito inferior a 100 mil, o que pode gerar ainda uma comparação injusta se olharmos para municípios com alta densidade populacional, ou, ao menos, superior a 100 mil habitantes. Para mais informações, veja a postagem da [Semana 2](https://rioemdados.netlify.app/post/n%C3%BAmero-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/).
+
+
+Você gostaria de saber como está o município em que você mora com relação ao número de casos confirmados e óbitos por Covid-19? Como o gráfico é interativo, aproveite para comparar quaisquer municípios entre si! Para isso, basta dar um duplo clique na legenda, nos municípios de interesse. Assim, você pode visualizar, de forma mais clara as diferenças entre os municípios. Compare, por exemplo, Rio de Janeiro e Niterói. Note também que no canto superior direito há uma série de opções para interação com o gráfico. Uma sugestão é utilizar o marcador “Comparar dados ao pairar”, facilitando assim a apresentação numérica.  
+
+```{r}
+
+municipios_rj$Data <- as.Date(municipios_rj$date)
+municipios_rj$Casos <- municipios_rj$last_available_confirmed_per_100k_inhabitants
+municipios_rj$Cidade <- municipios_rj$city
+
+municipios_rj %>%  
+ggplot( aes(x=Data, y=Casos, group=Cidade, color=Cidade)) +
+    geom_line() +
+    ggtitle("Casos acumulados por 100 mil habitantes por município") +
+    theme_minimal() + scale_x_date(date_labels = "%b %Y") +
+  theme(legend.title=element_blank())-> fig
+
+
+a <- ggplotly(fig) %>%
+  config(locale = "pt-br")
+
+a
+
+```
+
+Para melhorar a visualização neste caso, uma alternativa simples é agrupar os dados em categorias,   preferencialmente de modo que as unidades dentro de cada categoria sejam semelhantes entre si. Neste sentido, utilizar a definição cartográfica do Instituto Brasileiro de Geografia e Estatística (IBGE) denominada mesorregião pode ser uma boa alternativa, por ser uma abordagem difundida e bem aceita. Uma mesorregião é um conjunto de municípios que representa uma determinada localidade do estado. O estado do Rio de Janeiro é dividido nas seguintes mesorregiões:
+
+1. Metropolitana do Rio de Janeiro
+2. Noroeste Fluminense
+3. Norte Fluminense
+4. Centro Fluminense
+5. Baixadas
+6. Sul Fluminense
+
+Lembrando que esta é uma divisão com critério puramente geográfico e outras abordagens poderiam ser utilizadas.
+
+Na tabela abaixo, sinta-se a vontade para encontrar a qual mesorregião pertence o seu município!
+
+
+```{r,message=FALSE,warning=F}
+
+dt = unique(select(municipios_rj,city,meso))
+dt = dt[-6,]
+
+datatable(dt,colnames = c('Cidade', 'Mesorregião'),filter = 'top',options = list(language = list(url = "http://cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese.json")))
+```
+
+
+A seguir, você pode visualizar o gráfico com os números de casos acumulados por 100 mil habitantes por mesorregião. Perceba que o número de casos na região metropolitana foi ultrapassado pelo noroeste fluminense apenas em julho, suportando indícios de que a pandemia começou na capital e aos poucos foi sendo levada para o interior do estado.
+
+
+
+
+```{r,message=FALSE,warning=F}
+
+municipios_rj = drop_na(municipios_rj) 
+
+sul      <- subset(municipios_rj,meso=="Sul Fluminense")
+metro    <- subset(municipios_rj,meso=="Região Metropolitana")
+norte    <- subset(municipios_rj,meso=="Norte Fluminense")
+lagos    <- subset(municipios_rj,meso=="Região dos lagos")
+noroeste <- subset(municipios_rj,meso=="Noroeste Fluminense")
+centro   <- subset(municipios_rj,meso=="Centro Fluminense")
+
+
+sul %>% group_by(date) %>% summarise(sul_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000) -> sul_casos_taxa
+metro %>% group_by(date) %>% summarise(metro_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000) -> metro_casos_taxa
+norte %>% group_by(date) %>% summarise(norte_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000) -> norte_casos_taxa
+lagos %>% group_by(date) %>% summarise(lagos_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000) -> lagos_casos_taxa
+noroeste %>% group_by(date) %>% summarise(noroeste_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000) -> noroeste_casos_taxa
+centro %>% group_by(date) %>% summarise(centro_taxa=sum(last_available_confirmed)/sum(estimated_population_2019)*100000)   -> centro_casos_taxa
+
+
+estado = inner_join(sul_casos_taxa,metro_casos_taxa, by="date")
+estado = inner_join(estado,norte_casos_taxa, by="date")
+estado = inner_join(estado,lagos_casos_taxa, by="date")
+estado = inner_join(estado,noroeste_casos_taxa, by="date")
+estado = inner_join(estado,centro_casos_taxa, by="date")
+
+
+
+m <- list(
+  l = 50,
+  r = 50,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+fig <- plot_ly(estado, x = ~ymd(date), y = ~sul_taxa, name = 'Sul Fluminense', type = 'scatter', mode = 'lines',line = list(color = "rgba(160,82,45, 1)", width = 4)) %>% 
+add_trace(y = ~metro_taxa,    name = 'Região Metropolitana',line = list(color = "rgba(218, 112,214, 1)",width = 4)) %>% 
+add_trace(y = ~norte_taxa,    name = 'Norte Fluminense',line = list(color = "rgba(65,105,225, 1)",width = 4)) %>% 
+add_trace(y = ~lagos_taxa,    name = 'Região dos Lagos',line = list(color = "rgba(34,139,34, 1)",width = 4)) %>% 
+add_trace(y = ~noroeste_taxa, name = 'Noroeste Fluminense',line = list(color = "rgba(255,69,0, 1)",width = 4)) %>% 
+add_trace(y = ~centro_taxa, name = 'Centro Fluminense',line = list(color = "rgba(255,0,0, 1)",width = 4)) %>% 
+layout(title = "Casos acumulados por mesorregião para 100 mil habitantes ",xaxis = list(title = "Mês"), yaxis = list (title = "Casos confirmados para 100 mil habitantes"),autosize = F, width = 750, height = 500, margin = m)%>%
+  config(locale = "pt-br")
+
+fig
+
+```
+
+
+Quando observado o número de óbitos, a região metropolitana, embora apresente a segunda menor taxa de casos confirmados do estado, ela possui as maiores taxas de óbito por 100 mil habitantes durante todo o tempo observado (a partir de meados de agosto até o presente momento), como indicado no gráfico abaixo. Assim, há indícios de que, pelo fato de ser a região mais populosa, o sistema hospitalar pode não ter sido capaz de acomodar todos os casos, irradiando no aumento do número de óbitos. Por outro lado, o mesmo pensamento pode ser conduzido de forma análoga ao noroeste fluminense. Por sua vez, a mesorregião com maior número de casos e menor número de óbitos. Esta discrepância pode estar associada a baixa densidade populacional da mesorregião, onde todos os municípios ali presentes contam com menos de 100 mil habitantes cada. Neste caso, uma possível medida que relaciona a quantidade de casos com a quantidade de óbitos é a chamada ‘Taxa de Letalidade’, conceito que será abordado em postagens futuras.  
+
+
+
+
+```{r,echo=F,message=FALSE,warning=F}
+
+municipios_rj = drop_na(municipios_rj) 
+
+sul      <- subset(municipios_rj,meso=="Sul Fluminense")
+metro    <- subset(municipios_rj,meso=="Região Metropolitana")
+norte    <- subset(municipios_rj,meso=="Norte Fluminense")
+lagos    <- subset(municipios_rj,meso=="Região dos lagos")
+noroeste <- subset(municipios_rj,meso=="Noroeste Fluminense")
+centro   <- subset(municipios_rj,meso=="Centro Fluminense")
+
+
+sul %>% group_by(date) %>% summarise(sul_taxa= sum(last_available_deaths)/sum(estimated_population_2019)*100000 )  -> sul_casos_taxa
+metro %>% group_by(date) %>% summarise(metro_taxa=sum(last_available_deaths)/sum(estimated_population_2019)*100000) -> metro_casos_taxa
+norte %>% group_by(date) %>% summarise(norte_taxa=sum(last_available_deaths)/sum(estimated_population_2019)*100000) -> norte_casos_taxa
+lagos %>% group_by(date) %>% summarise(lagos_taxa=sum(last_available_deaths)/sum(estimated_population_2019)*100000) -> lagos_casos_taxa
+noroeste %>% group_by(date) %>% summarise(noroeste_taxa=sum(last_available_deaths)/sum(estimated_population_2019)*100000) -> noroeste_casos_taxa
+centro%>%group_by(date)%>%summarise(centro_taxa=sum(last_available_deaths)/sum(estimated_population_2019)*100000) -> centro_casos_taxa
+
+
+estado = inner_join(sul_casos_taxa,metro_casos_taxa, by="date")
+estado = inner_join(estado,norte_casos_taxa, by="date")
+estado = inner_join(estado,lagos_casos_taxa, by="date")
+estado = inner_join(estado,noroeste_casos_taxa, by="date")
+estado = inner_join(estado,centro_casos_taxa, by="date")
+
+m <- list(
+  l = 50,
+  r = 50,
+  b = 100,
+  t = 50,
+  pad = 4
+)
+
+fig <- plot_ly(estado, x = ~ymd(date), y = ~sul_taxa, name = 'Sul Fluminense', type = 'scatter', mode = 'lines',line = list(color = "rgba(160,82,45, 1)", width = 4)) %>% 
+add_trace(y = ~metro_taxa,    name = 'Região Metropolitana',line = list(color = "rgba(218, 112,214, 1)",width = 4)) %>% 
+add_trace(y = ~norte_taxa,    name = 'Norte Fluminense',line = list(color = "rgba(65,105,225, 1)",width = 4)) %>% 
+add_trace(y = ~lagos_taxa,    name = 'Região dos Lagos',line = list(color = "rgba(34,139,34, 1)",width = 4)) %>% 
+add_trace(y = ~noroeste_taxa, name = 'Noroeste Fluminense',line = list(color = "rgba(255,69,0, 1)",width = 4)) %>% 
+add_trace(y = ~centro_taxa, name = 'Centro Fluminense',line = list(color = "rgba(255,0,0, 1)",width = 4)) %>% 
+layout(title = "Óbitos confirmados por mesorregião para 100 mil habitantes ",xaxis = list(title = "Mês"), yaxis = list (title = "Óbitos confirmados para 100 mil habitantes"),autosize = F, width = 750, height = 500, margin = m)%>%
+  config(locale = "pt-br")
+
+fig
+
+```
+
+
+<br>
+
+### Fonte
+
+Secretariais municipais de saúde através do [Data.Rio](https://www.data.rio/) e do [Brasil.io](https://brasil.io/home/).
+
+<br>
+
+**Período dos dados analisados**: 3 de abril a 23 de outubro de 2020;
+ 
+
+ 

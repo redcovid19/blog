@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>desemprego on Rio em Dados</title>
+    <link>https://rioemdados.netlify.app/tags/desemprego/</link>
+    <description>Recent content in desemprego on Rio em Dados</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/desemprego/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quem são os desempregados na pandemia?</title>
+      <link>https://rioemdados.netlify.app/post/2021-01-15-quem-s%C3%A3o-os-desempregados-na-pandemia/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/post/2021-01-15-quem-s%C3%A3o-os-desempregados-na-pandemia/</guid>
+      <description>O desemprego, segundo o IBGE, se refere às pessoas com idade de trabalhar (acima de 14 anos) que não estão trabalhando, mas estão disponíveis e tentam encontrar trabalho.
+A Figura 1 retrata a taxa de desocupação nos estados do Brasil. Percebe-se que a menor taxa é a de Santa Catarina (7,7%), enquanto a maior pertence ao Maranhão (19,9%).</description>
+    </item>
+    
+  </channel>
+</rss>

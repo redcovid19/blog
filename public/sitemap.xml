@@ -3,29 +3,198 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://rioemdados.netlify.app/project/project1/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/project/project2/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/project/project3/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/project/project4/</loc>
+    <loc>https://rioemdados.netlify.app/post/2021-01-18-sou-eu-o-respons%C3%A1vel-por-meu-irm%C3%A3o-ou-o-porqu%C3%AA-de-vacinar/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://rioemdados.netlify.app/categories/</loc>
-    <lastmod>2020-11-02T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/corona-v%C3%ADrus/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://rioemdados.netlify.app/categories/covid19/</loc>
-    <lastmod>2020-11-02T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/hist%C3%B3ria/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/categories/vacina/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/vacina/</loc>
+    <lastmod>2021-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/categories/aux%C3%ADlio-emergencial/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/aux%C3%ADlio-emergencial/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/categories/desemprego/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/desemprego/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/gr%C3%A1fico-interativo/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/categories/home-office/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/home-office/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2021-01-15-o-que-%C3%A9-o-aux%C3%ADlio-emergencial-e-quais-pessoas-foram-beneficiadas/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2021-01-15-qual-perfil-das-pessoas-que-usufruem-do-privil%C3%A9gio-de-trabalhar-em-home-office/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2021-01-15-quem-s%C3%A3o-os-desempregados-na-pandemia/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/renda/</loc>
+    <lastmod>2021-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/curva/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/m%C3%A9dia-m%C3%B3vel/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/categories/rio-de-janeiro/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-12-21-segunda-onda/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/segunda-onda/</loc>
+    <lastmod>2020-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-12-14-e-essa-tal-curva-uma-introdu%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/achatar-a-curva/</loc>
+    <lastmod>2020-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/fun%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-11-30-covid-19-renda-e-letalidade-nos-bairros-do-munic%C3%ADpio-do-rio-de-janeiro/</loc>
+    <lastmod>2020-11-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/letalidade/</loc>
+    <lastmod>2020-11-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/mapa-covid19/</loc>
+    <lastmod>2020-11-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/%C3%B3bitos/</loc>
+    <lastmod>2020-11-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-11-23-como-visualizar-a-evolu%C3%A7%C3%A3o-da-covid-19-em-um-territ%C3%B3rio-de-interesse-ao-longo-do-tempo/</loc>
+    <lastmod>2020-11-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-11-16-o-que-%C3%A9-m%C3%A9dia-m%C3%B3vel/</loc>
+    <lastmod>2020-11-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/taxa-m%C3%B3vel/</loc>
+    <lastmod>2020-11-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/tags/mesorregi%C3%A3o/</loc>
+    <lastmod>2020-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rioemdados.netlify.app/post/2020-11-09-ser%C3%A1-que-%C3%A9-poss%C3%ADvel-comparar-seu-munic%C3%ADpio-com-os-demais-num-gr%C3%A1fico/</loc>
+    <lastmod>2020-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -34,28 +203,8 @@
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/post/</loc>
+    <loc>https://rioemdados.netlify.app/tags/taxa-por-100-mil-habitantes/</loc>
     <lastmod>2020-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/</loc>
-    <lastmod>2020-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/</loc>
-    <lastmod>2020-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/%C3%B3bitos/</loc>
-    <lastmod>2020-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -64,55 +213,11 @@
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/bootstrap/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/css/</loc>
-  </url>
-  
-  <url>
     <loc>https://rioemdados.netlify.app/equipe/</loc>
   </url>
   
   <url>
-    <loc>https://rioemdados.netlify.app/tags/go/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/golang/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/highlight-js/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/html/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/hugo/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/js/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/project/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/responsive/</loc>
-  </url>
-  
-  <url>
     <loc>https://rioemdados.netlify.app/about/</loc>
-  </url>
-  
-  <url>
-    <loc>https://rioemdados.netlify.app/tags/syntax-highlighting/</loc>
   </url>
   
 </urlset>

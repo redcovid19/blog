@@ -6,112 +6,184 @@
     <description>Recent content in Tags on Rio em Dados</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Óbitos</title>
-      <link>https://rioemdados.netlify.app/tags/%C3%B3bitos/</link>
-      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      <title>corona vírus</title>
+      <link>https://rioemdados.netlify.app/tags/corona-v%C3%ADrus/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/%C3%B3bitos/</guid>
+      <guid>https://rioemdados.netlify.app/tags/corona-v%C3%ADrus/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Número de Casos</title>
+      <title>história</title>
+      <link>https://rioemdados.netlify.app/tags/hist%C3%B3ria/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/hist%C3%B3ria/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vacina</title>
+      <link>https://rioemdados.netlify.app/tags/vacina/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/vacina/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>auxílio emergencial</title>
+      <link>https://rioemdados.netlify.app/tags/aux%C3%ADlio-emergencial/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/aux%C3%ADlio-emergencial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>desemprego</title>
+      <link>https://rioemdados.netlify.app/tags/desemprego/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/desemprego/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gráfico interativo</title>
+      <link>https://rioemdados.netlify.app/tags/gr%C3%A1fico-interativo/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/gr%C3%A1fico-interativo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>home office</title>
+      <link>https://rioemdados.netlify.app/tags/home-office/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/home-office/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>renda</title>
+      <link>https://rioemdados.netlify.app/tags/renda/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/renda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>curva</title>
+      <link>https://rioemdados.netlify.app/tags/curva/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/curva/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>média móvel</title>
+      <link>https://rioemdados.netlify.app/tags/m%C3%A9dia-m%C3%B3vel/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/tags/m%C3%A9dia-m%C3%B3vel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>número de casos</title>
       <link>https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/</link>
-      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://rioemdados.netlify.app/tags/n%C3%BAmero-de-casos/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>bootstrap</title>
-      <link>https://rioemdados.netlify.app/tags/bootstrap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>segunda onda</title>
+      <link>https://rioemdados.netlify.app/tags/segunda-onda/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/bootstrap/</guid>
+      <guid>https://rioemdados.netlify.app/tags/segunda-onda/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>css</title>
-      <link>https://rioemdados.netlify.app/tags/css/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>achatar a curva</title>
+      <link>https://rioemdados.netlify.app/tags/achatar-a-curva/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/css/</guid>
+      <guid>https://rioemdados.netlify.app/tags/achatar-a-curva/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>go</title>
-      <link>https://rioemdados.netlify.app/tags/go/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>função</title>
+      <link>https://rioemdados.netlify.app/tags/fun%C3%A7%C3%A3o/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/go/</guid>
+      <guid>https://rioemdados.netlify.app/tags/fun%C3%A7%C3%A3o/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>golang</title>
-      <link>https://rioemdados.netlify.app/tags/golang/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>letalidade</title>
+      <link>https://rioemdados.netlify.app/tags/letalidade/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/golang/</guid>
+      <guid>https://rioemdados.netlify.app/tags/letalidade/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>highlight-js</title>
-      <link>https://rioemdados.netlify.app/tags/highlight-js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>mapa covid19</title>
+      <link>https://rioemdados.netlify.app/tags/mapa-covid19/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/highlight-js/</guid>
+      <guid>https://rioemdados.netlify.app/tags/mapa-covid19/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>html</title>
-      <link>https://rioemdados.netlify.app/tags/html/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>óbitos</title>
+      <link>https://rioemdados.netlify.app/tags/%C3%B3bitos/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/html/</guid>
+      <guid>https://rioemdados.netlify.app/tags/%C3%B3bitos/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>hugo</title>
-      <link>https://rioemdados.netlify.app/tags/hugo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>taxa móvel</title>
+      <link>https://rioemdados.netlify.app/tags/taxa-m%C3%B3vel/</link>
+      <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/hugo/</guid>
+      <guid>https://rioemdados.netlify.app/tags/taxa-m%C3%B3vel/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>js</title>
-      <link>https://rioemdados.netlify.app/tags/js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>mesorregião</title>
+      <link>https://rioemdados.netlify.app/tags/mesorregi%C3%A3o/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/js/</guid>
+      <guid>https://rioemdados.netlify.app/tags/mesorregi%C3%A3o/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>responsive</title>
-      <link>https://rioemdados.netlify.app/tags/responsive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>taxa por 100 mil habitantes</title>
+      <link>https://rioemdados.netlify.app/tags/taxa-por-100-mil-habitantes/</link>
+      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://rioemdados.netlify.app/tags/responsive/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>syntax-highlighting</title>
-      <link>https://rioemdados.netlify.app/tags/syntax-highlighting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://rioemdados.netlify.app/tags/syntax-highlighting/</guid>
+      <guid>https://rioemdados.netlify.app/tags/taxa-por-100-mil-habitantes/</guid>
       <description></description>
     </item>
     

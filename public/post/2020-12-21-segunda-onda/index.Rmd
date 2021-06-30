@@ -1,0 +1,240 @@
+---
+title: Segunda onda
+author: ''
+date: '2020-12-21'
+slug: []
+categories:
+  - Covid19
+  - Rio de Janeiro
+tags:
+  - número de casos
+  - curva
+  - segunda onda
+  - média móvel
+---
+
+---
+title: "Segunda onda"
+author: "Camila Rodrigues"
+date: "17 de Novembro de 2020"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+---
+<p>
+Os conceitos de quarentena e isolamento social são dois dos mais antigos para a contenção do contágio em pandemias. A peste negra, no século XIV, foi uma das mais devastadoras pandemias da história, podendo ter chegado a matar 200 milhões de pessoas. A bactéria que provocava a doença se alojava em pulgas e ratos, fazendo com que o contágio acontecesse por causa da grande quantidade de ratos presentes nos navios da época. Mais tarde, a transmissão passou a acontecer por gotículas e espirros, permitindo o agravamento da peste por conta da falta de higiene e cuidados básicos da época.</br />
+
+<p>
+A quarentena passou a vigorar neste período, onde os barcos e navios deviam permanecer isolados durante 40 dias antes dos passageiros desembarcarem nos portos, em uma tentativa de conter a doença. Também conhecida como peste bubônica, ela teve dezenas de ondas, sendo registrados casos até o século atual. Mas afinal, qual é o conceito de onda? Do ponto de vista matemático você pode ver uma onda representada na Figura 1. Já do ponto de vista epidemiológico, uma onda está diretamente relacionada com o número de casos de uma doença. À medida que o número de infectados vai aumentando  e diminuindo, a onda vai se formando. Em uma pandemia podem ocorrer várias ondas e seus formatos e alturas podem ser diferentes.</br  />
+
+
+**Figura 1: Onda genérica**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=5, fig.height=4}
+x=seq(pi, 4*pi,0.001)
+a=sin(x)+1
+plot(a, col = "red", xlab="x", ylab="y" , lwd=1, axes =F)
+#plot(a,pi, 4*pi, col = "red", xlab="x", ylab="y" , lwd=2, axes =F)
+axis(1,cex.axis=1)
+axis(2,cex.axis=1)
+
+
+```
+
+
+<p>
+Já a segunda onda é caracterizada quando, após uma grande quantidade de infectados por uma particular doença, os números de casos, internações ou óbitos são controlados gerando uma flexibilização das medidas de isolamento, o que acaba levando a um processo de recontágio. Em particular, na segunda onda pode-se ter consequências muito mais severas do que na primeira. Não existe uma especificação sobre qual o número de infectados é necessário para que se caracterize uma nova onda, apenas que haja um crescimento muito grande depois de um controle significativo da doença.</br />
+
+<p>
+A gripe espanhola, causada por um vírus (assim como a Covid-19) gerou outra pandemia nos anos de 1918 e 1919 e há estimativas de que tenha levado pelo menos 50 milhões de pessoas a óbito. Registros apontam que o primeiro caso foi diagnosticado em março de 1918 nos Estados Unidos, chegando no Brasil apenas em setembro de 1918, quando já estava se alastrando a segunda onda norte-americana, que ficou conhecida por ser a mais contagiosa. As medidas de isolamento social também foram adotadas nesta época. Veja na Figura 2 as três ondas que se alastraram no Reino Unido durante a pandemia do século passado. </br />
+
+
+**Figura 2: Número de óbitos pela gripe espanhola no Reino Unido**
+
+
+<br>
+
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='Blackbox' src='https://i.imgur.com/yboxz5N.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
+
+<font size="2.75"> *Fonte dos dados: Center of Disease and Prevention (CDC) 2009*</font></br  />
+</br >
+
+<p>
+No entanto, vale ressaltar que em 1918 a gripe espanhola levou cerca de 6 meses para chegar ao Brasil após o primeiro caso notificado, enquanto na pandemia da Covid-19 o país teve seu primeiro caso registrado em março de 2020, apenas 3 meses depois do início dos primeiros infectados terem surgido na China. Ou seja, na atual realidade onde o mundo está cada vez mais globalizado, e as distâncias físicas se tornam cada vez menores, o coronavírus acaba ganhando força.
+
+<p>
+Desde o início de outubro, alguns países da Europa vêm enfrentando uma segunda onda da Covid-19 e adotando novamente medidas de isolamento e lockdown. Itália e Reino Unido, por exemplo, estão passando por um período bem mais intenso em relação ao número de infectados se comparado à primeira onda. Observe na Figura 3 o comportamento do número de novos casos confirmados para esses dois países.</br />
+
+
+**Figura 3: Número de casos confirmados de Covid-19 - Itália e Reino Unido**
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(plotly)
+library(xts)
+library(gridExtra)
+library(ggplot2)
+library(forecast)
+
+italia <- read_csv("data/Data_Italy_17112020.csv")
+x=italia$date
+y=italia$NewConfirmed
+
+t = xts(y,x)
+today <- Sys.Date()
+pais = rep("Itália",301)
+xx <- today - x
+
+fig <- plot_ly(x = ~x, y = ~y, color = ~pais , colors = "Blue", mode = 'lines', text = paste(xx, "dias atrás"), lgendgroup= "Itália", showlegend=T)
+
+fig <- fig %>% layout( separators= ',',
+                        title = '',
+         xaxis = list(title = ''),
+         yaxis = list (title = ''))
+
+
+ru = read_csv("data/Reino Unido.csv")
+x1=ru$date
+y1=ru$NewConfirmed
+
+t=xts(y1,x1)
+hj = Sys.Date()
+
+pais2 = rep("Reino Unido",301)
+
+xx1= hj-x1
+fig2 <- plot_ly(x = ~x1, y = ~y1,color=~pais2, colors = "Red", mode = 'lines', text = paste(xx1, "dias atrás"), legedgroup ="Reino Unido", showlegend=T )
+fig2 <- fig2 %>% layout( separators= ',',
+                        title = '',
+         xaxis = list(title = ''),
+         yaxis = list (title = 'Número de casos confirmados da Covid-19'))
+
+
+#p= subplot(fig, fig2, margin=0.05, nrows=2)
+#plt.legend([fig,fig2],["Itália", "Reino Unido"])
+subplot(fig, fig2, nrows = 2, margin = 0.05) %>% config(locale = "pt-br")
+
+#p
+```
+<font size="2.75"> *Fonte dos dados: Universidade Johns Hopkins*</font></br  />
+</br >
+
+<p>
+O Brasil apresenta um quadro diferente do número de casos de Covid-19 quando comparado com Itália e Reino Unido e outros países do mundo. Apesar da queda ter se iniciado em agosto, o número de novos casos confirmados parece estar novamente aumentando desde o início de novembro, como pode ser observado na Figura 4. Entretanto, em nenhum momento da pandemia, foi possível identificar um alto controle do número de infectados, portanto, esse novo crescimento pode não se configurar como uma segunda onda.</br >
+
+**Figura 4: Número de casos confirmados de Covid-19 no Brasil**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(xts)
+library(plotly)
+
+Brasil <- read_delim("data/Brasil.csv", ";", escape_double = FALSE, 
+     trim_ws = TRUE)
+x=Brasil$date
+y=Brasil$NewConfirmed
+
+x = as.Date(x, "%d/%m/%Y")
+
+t=xts(y,x)
+hj = Sys.Date()
+
+xx= hj-x
+fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(xx, "dias atrás")) %>% config(locale = "pt-br")
+fig <- fig %>% layout(separators= ',',
+                        title = '',
+         xaxis = list(title = ''),
+         yaxis = list (title = 'Número de casos confirmados da Covid-19'))
+
+
+fig
+
+```
+
+<font size="2.75"> *Fonte dos dados: Ministério da Saúde*</font></br  />
+
+<p>
+A cidade do Rio de Janeiro também não apresentou até o momento um controle efetivo no número de contaminados para que se denomine o final de uma onda. Apesar das flexibilizações das medidas de isolamento, o que pode ser observado é a falta de um padrão na curva do número de casos desde o início da doença na cidade (Figura 5). 
+</br  />
+
+**Figura 5: Média móvel de casos confirmados de Covid-19 na cidade do Rio de Janeiro**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(dplyr)
+library(zoo)
+library(xts)
+library(plotly)
+ 
+dados <- read_delim("data/Dados_indiv_MRJ_covid_19.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+ 
+dados$dt_notific = as.Date(dados$dt_notific , "%d/%m/%y")
+dados$aux = 1
+dados = dados %>% select(dt_notific, aux)
+dados <-na.omit(dados)
+
+
+#Agrupando os dados por dia
+dados_total <-  dados %>% arrange(dt_notific) %>%  group_by(dt_notific) %>% mutate(Soma = sum(aux)) %>% distinct(dt_notific, .keep_all = T) %>%  select(dt_notific, Soma) %>% ungroup()
+
+#plot(dados_total, type="line")
+
+#Calculando a média móvel, mv_7: media movel de 7 dias
+mv <- dados_total %>% mutate(mv_7 = rollmean(Soma, k = 7, fill = NA),
+                  mv_14 = rollmean(Soma, k = 14, fill = NA))
+
+
+#Gráfico da Média móvel, com k=14
+gf1 = mv %>% select(dt_notific, mv_14)
+gf1 = na.omit(gf1)
+
+x=gf1$dt_notific
+y=gf1$mv_14
+
+
+t=xts(y,x)
+hj = Sys.Date()
+
+xx= hj-x
+fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(xx, "dias atrás"), color ="red") %>% config(locale = "pt-br")
+fig <- fig %>% layout(separators= ',',
+                        title = '',
+         xaxis = list(title = ''),
+         yaxis = list (title = 'Média móvel dos casos confirmados'))
+
+
+fig
+
+
+```
+<font size="2.75"> *Fonte dos dados: Prefeitura do Rio de Janeiro*</font></br  />
+
+
+<p>
+Não somente na Europa, mas a realidade da segunda onda já existe em vários outros países. O relaxamento das medidas de isolamento adotadas no Brasil nos últimos meses, além de ter feito com que o Brasil tivesse a onda mais persistente dentre os países mencionados, fez com que o número geral de casos voltasse a subir, com indícios de que a subnotificação também esteja alta devido à diminuição da testagem. Além disso, Muitos especialistas já recomendam que medidas mais severas de isolamento sejam adotas para evitar uma segunda onda ainda mais letal que a primeira.  </br  />
+</br  />
+</br  />
+</br  />
+
+<font size="2.75"> *Dados internacionais coletados até o dia 17 de novembro, do Brasil até 16 de novembro de 2020 e Rio de Janeiro até 21 de novembro de 2020. </font></br  />
+
+#### Referências e Fontes:
+
+- [Biblioteca Nacional](https://www.bn.gov.br/acontece/noticias/2020/04/quarentena-isolamento-peste-negra-origem-quarentena#:~:text=O%20pioneirismo%20atribu%C3%ADdo%20a%20Veneza,do%20avan%C3%A7o%20da%20Peste%20Negra)
+
+- [Site História do mundo](https://www.historiadomundo.com.br/idade-media/peste-negra.htm)
+
+- [Fiocruz](https://portal.fiocruz.br/noticia/dados-do-boletim-infogripe-indicam-segunda-onda-de-srag)
+
+- [Universidade Johns Hopkins](https://coronavirus.jhu.edu/map.html)
+
+- [Ministério da Saúde](https://covid.saude.gov.br/)
+
+- [Prefeitura do Rio de Janeiro](http://www.rio.rj.gov.br/web/transparencia/coronavirus)
+
+- [Jornal Nexo](https://www.nexojornal.com.br/expresso/2020/11/01/A-for%C3%A7a-da-2%C2%AA-onda-de-covid-na-Europa.-E-o-efeito-no-Brasil)
+
+- [CDC 2009](https://www.cdc.gov/flu/pandemic-resources/1918-pandemic-h1n1.html)

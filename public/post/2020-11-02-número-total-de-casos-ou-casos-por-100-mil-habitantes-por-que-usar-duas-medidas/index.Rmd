@@ -6,7 +6,10 @@ slug: []
 categories:
   - Covid19
 tags:
-  - Óbitos
+  - número de casos
+  - óbitos
+  - mapa covid19
+  - taxa por 100 mil habitantes
 ---
 
 **Por Guilherme dos Santos**
@@ -24,9 +27,8 @@ library(knitr)
 library(kableExtra)
 
 
-path = "D:\\beatr\\Documentos\\R\\blog\\content\\post\\data\\"
+municipios_rj <- read.csv2("data/municpios_rj.csv", row.names = 1)
 
-municipios_rj <- read.csv2(paste0(path,"municpios_rj.csv"), row.names = 1)
 municipios_rj <- municipios_rj %>% 
   mutate_at(.vars = vars(4,5, 8:9, 11:13, 16,17), ~as.numeric(.))
 dados <- municipios_rj
@@ -88,14 +90,11 @@ g %>% ggplotly(tooltip = c("text"))
   
   Em termos matemáticos, o número de casos por 100 mil habitantes é calculado da seguinte forma:
 
-![](/2020-11-02-número-total-de-casos-ou-casos-por-100-mil-habitantes-por-que-usar-duas-medidas/index_files/post2_image1.PNG)
 
-![Imgur](https://i.imgur.com/pP3WFOA.png)
-  
-html"<span class='img_container center' style='display: inline-block;'>
-    <img alt='test' src='https://i.imgur.com/pP3WFOA.png' style='display:block; margin-left: auto; margin-right: auto;' title='O que está na caixa?!' />
-    <span class='img_caption' style='display: block; text-align: center;'>Figura 1: Função como caixa</span>
-</span>"
+<span class='img_container center' style='display: inline-block;'>
+    <img alt='taxa' src='https://i.imgur.com/pP3WFOA.png' style='display:block; margin-left: auto; margin-right: auto;' title='' />
+    <span class='img_caption' style='display: block; text-align: center;'></span>
+</span>
 
   Sob este ponto de vista, portanto, como está a situação nos municípios do Rio de Janeiro atualmente com relação a Covid-19?
   

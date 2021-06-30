@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mesorregião on Rio em Dados</title>
+    <link>https://rioemdados.netlify.app/tags/mesorregi%C3%A3o/</link>
+    <description>Recent content in mesorregião on Rio em Dados</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/mesorregi%C3%A3o/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Será que é possível comparar seu município com os demais num gráfico?</title>
+      <link>https://rioemdados.netlify.app/post/2020-11-09-ser%C3%A1-que-%C3%A9-poss%C3%ADvel-comparar-seu-munic%C3%ADpio-com-os-demais-num-gr%C3%A1fico/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/post/2020-11-09-ser%C3%A1-que-%C3%A9-poss%C3%ADvel-comparar-seu-munic%C3%ADpio-com-os-demais-num-gr%C3%A1fico/</guid>
+      <description>body{text-align: justify;}Por Rafael Cabral Fernandez
+Imagine que seja de interesse analisar no mesmo gráfico o número de casos ou óbitos acumulados em todos os municípios do Rio de Janeiro. Do ponto de vista visual, isso seria razoável?
+Observe pelo gráfico a seguir que representar 92 municípios é o mesmo que traçar 92 linhas, uma para cada.</description>
+    </item>
+    
+  </channel>
+</rss>

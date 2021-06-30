@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>taxa móvel on Rio em Dados</title>
+    <link>https://rioemdados.netlify.app/tags/taxa-m%C3%B3vel/</link>
+    <description>Recent content in taxa móvel on Rio em Dados</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/tags/taxa-m%C3%B3vel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>O que é média móvel?</title>
+      <link>https://rioemdados.netlify.app/post/2020-11-16-o-que-%C3%A9-m%C3%A9dia-m%C3%B3vel/</link>
+      <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/post/2020-11-16-o-que-%C3%A9-m%C3%A9dia-m%C3%B3vel/</guid>
+      <description>body{text-align: justify;}Por Rafael Cabral Fernandez
+Muito tem se falado na mídia e nos telejornais sobre média móvel, mas você sabe o que significa? Nesta postagem vamos explicar de forma simples sua utilidade e como interpretá-la. Por que é uma medida tão utilizada pelos maiores veículos jornalísticos brasileiros e mundo afora? Descubra conosco!
+Analisar gráficos que evoluem diariamente ao longo do tempo pode ser uma tarefa desafiadora.</description>
+    </item>
+    
+  </channel>
+</rss>

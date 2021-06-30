@@ -6,13 +6,58 @@
     <description>Recent content in Categories on Rio em Dados</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://rioemdados.netlify.app/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Covid19</title>
       <link>https://rioemdados.netlify.app/categories/covid19/</link>
-      <pubDate>Mon, 02 Nov 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://rioemdados.netlify.app/categories/covid19/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vacina</title>
+      <link>https://rioemdados.netlify.app/categories/vacina/</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/categories/vacina/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Auxílio Emergencial</title>
+      <link>https://rioemdados.netlify.app/categories/aux%C3%ADlio-emergencial/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/categories/aux%C3%ADlio-emergencial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Desemprego</title>
+      <link>https://rioemdados.netlify.app/categories/desemprego/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/categories/desemprego/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Home Office</title>
+      <link>https://rioemdados.netlify.app/categories/home-office/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/categories/home-office/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rio de Janeiro</title>
+      <link>https://rioemdados.netlify.app/categories/rio-de-janeiro/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://rioemdados.netlify.app/categories/rio-de-janeiro/</guid>
       <description></description>
     </item>
     
